@@ -17,11 +17,11 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: './dist'
+        contentBase: './public'
     },
     output: {
         filename: 'app.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'public')
     },
     externals: {
         mathjax: 'MathJax'
