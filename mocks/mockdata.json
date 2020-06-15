@@ -1,0 +1,95 @@
+{
+    "cardsets": {
+        "1": {
+            "owner": "1",
+            "title": "Addition",
+            "nratings": 1,
+            "rating": 5,
+            "public": true, 
+            "lastUpdated": "2018-03-30T13:18:39.516Z",
+            "cards": {
+                "1": {
+                    "title": "One plus One",
+                    "front": "$$1+1$$",
+                    "back": "2"
+                },
+                "2": {
+                    "title": "",
+                    "front": "$$2+2$$",
+                    "back": "4"
+                }
+            }
+        },
+        "2": {
+            "owner": "1",
+            "title": "Subtraction",
+            "rating": 4.5,
+            "public": true, 
+            "nratings": 4,
+            "lastUpdated": "2018-03-30T13:18:39.516Z",
+            "cards": {}
+        },
+        "3": {
+            "owner": "2",
+            "title": "Multiplication",
+            "rating": 5,
+            "nratings": 0,
+            "public": false,
+            "lastUpdated": "2018-03-30T13:18:39.516Z",
+            "cards": {
+                "1": {
+                    "title": "",
+                    "front": "$$2+3$$",
+                    "back": "2"
+                },
+                "2": {
+                    "title": "",
+                    "front": "$$2+2$$",
+                    "back": "4"
+                }
+            }
+  
+        },
+        "4": {
+            "owner": "3",
+            "title": "Trig. Sub",
+            "nratings": 9,
+            "public": true,
+            "rating": 1.4,
+            "lastUpdated": "2018-03-30T13:18:39.516Z",
+            "cards": {
+                "1": {
+                    "title": "Tan",
+                    "front": "$$x^2+a^2$$",
+                    "back": "$$a^2tan^2\\theta$$"
+                },
+                "2": {
+                    "title": "Sec",
+                    "front": "To be continued",
+                    "back": "4"
+                }
+            }
+        }
+    },
+    "users": {
+        "1": {
+            "displayName": "jawn123",
+            "cardsets": {
+                "1": { "title": "Addition" },
+                "2": { "title": "Subtraction" }
+            }
+        },
+        "2": {
+            "displayName": "euler",
+            "cardsets": {
+                "3": { "title": "Multiplication" }
+            }
+        },
+        "3": {
+            "displayName": "",
+            "cardsets": {
+                "4": { "title": "Trig. Sub" }
+            }
+        }
+    }
+}
