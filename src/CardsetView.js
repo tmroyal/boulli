@@ -1,5 +1,34 @@
 import React from 'react'
 import { CardEditorViewer } from './CardView'
+import { NavButton, StateButton } from './Buttons' 
+
+class CardsetViewNav extends React.Component {
+
+    render (){
+        return (
+            <nav className="mui-row">
+                <NavButton 
+                    direction="-1" 
+                    className="mui-btn mui-col-sm-2 mui-col-sm-offset-2"
+                    onClick={this.props.onNavigate.bind(this,-1)}
+                    text="Left" />
+                <NavButton 
+                    direction="1" 
+                    className="mui-btn mui-col-sm-2"
+                    onClick={this.props.onNavigate.bind(this,1)}
+                    text="Right" />
+                <StateButton 
+                    className="mui-btn mui-col-sm-2"
+                    onClick={this.props.onAddCard}
+                    text="+" />
+                <StateButton
+                    className="mui-btn mui-col-sm-2"
+                    onClick={this.props.onRemoveCard}
+                    text="-" />
+            </nav>
+        );
+    }
+}
 
 export class CardsetView extends React.Component {
     constructor(props){
@@ -43,6 +72,7 @@ export class CardsetView extends React.Component {
 
     // TODO: when card changed, trigger this method first
     // TODO: when we add a card, trigger this method. (and then push to ensure)
+    // TODO: when we remove a card, trigger this method
     // TODO: hide editing button if wrong user
     saveCards(){
         let query = this.getQuery()+'/cards';
@@ -50,8 +80,28 @@ export class CardsetView extends React.Component {
             if (error){ console.error(error); }
         });
     }
+
+    navigateCards(direction){
+        let index = (this.state.index + direction); 
+
+        while (index < 0){ 
+            index += this.state.keys.length;
+        } 
+        index %= this.state.keys.length;  
+
+        this.setState({
+            index: index
+        });
+    }
     
-    // in this class will be the ui for changing cards
+    addCard(){
+        console.log("add card after current");
+    }
+
+    removeCard(){
+        console.log("remove current card");
+    }
+    
     render (){
         let currentCardKey = this.state.keys[this.state.index];
         let currentView = currentCardKey ? 
@@ -61,7 +111,16 @@ export class CardsetView extends React.Component {
                 saveCard={ this.saveCards.bind(this) }
             /> : 
             <></>;
-        return currentView;
+        return (
+            <section>
+                { currentView }
+                <CardsetViewNav 
+                    onNavigate={ this.navigateCards.bind(this) }
+                    onAddCard={ this.addCard.bind(this) }
+                    onRemoveCard={ this.removeCard.bind(this) }
+                />
+            </section>
+        );
     }
 }
 
