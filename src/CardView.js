@@ -27,6 +27,7 @@ class CardEditor extends React.Component {
        this.props.formulaChanged(event.target.value); 
    }
     
+    // TODO: hide editing button if wrong user
    render (){
        const initValue = this.props.showingFront ?
                              this.props.card.front : this.props.card.back;

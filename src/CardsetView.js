@@ -44,9 +44,9 @@ export class CardsetView extends React.Component {
         let query = this.getQuery();
 
         firebase.database().ref(query).on('value', (snapshot)=>{
-            console.log(snapshot.val());
             let cards = snapshot.val().cards;
             let keys = Object.keys(cards);
+            // firebase pushes to front
             let index = 0;
 
             this.setState({
@@ -70,10 +70,7 @@ export class CardsetView extends React.Component {
         });
     }
 
-    // TODO: when card changed, trigger this method first
-    // TODO: when we add a card, trigger this method. (and then push to ensure)
-    // TODO: when we remove a card, trigger this method
-    // TODO: hide editing button if wrong user
+    // TODO: when card while editing changed, trigger this method first
     saveCards(){
         let query = this.getQuery()+'/cards';
         firebase.database().ref(query).set(this.state.cards).then(function(error){
@@ -95,11 +92,22 @@ export class CardsetView extends React.Component {
     }
     
     addCard(){
-        console.log("add card after current");
+        let newCard = {
+            title: "",
+            front: "$$=$$",
+            back: "$$=$$"
+        }
+        // TODO: UI to handle latency
+        firebase.database().ref(this.getQuery()+'/cards').push(newCard);
     }
 
     removeCard(){
-        console.log("remove current card");
+        let currentKey = this.state.keys[this.state.index];       
+        if (this.state.keys.length <= 1){ 
+            this.addCard(); 
+        }
+            
+        firebase.database().ref(this.getQuery()+'/cards/'+currentKey).remove();
     }
     
     render (){
