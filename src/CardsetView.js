@@ -2,6 +2,7 @@ import React from 'react'
 import { CardEditorViewer } from './CardView'
 import { NavButton, StateButton } from './Buttons' 
 
+
 class CardsetViewNav extends React.Component {
 
     render (){
@@ -46,13 +47,10 @@ export class CardsetView extends React.Component {
         firebase.database().ref(query).on('value', (snapshot)=>{
             let cards = snapshot.val().cards;
             let keys = Object.keys(cards);
-            // firebase pushes to front
-            let index = 0;
 
             this.setState({
                 cards: cards,
                 keys: keys, 
-                index: index
             });
         });
     }
@@ -98,7 +96,15 @@ export class CardsetView extends React.Component {
             back: "$$=$$"
         }
         // TODO: UI to handle latency
-        firebase.database().ref(this.getQuery()+'/cards').push(newCard);
+        firebase.database().ref(this.getQuery()+'/cards').push(newCard)
+        .then((cardRecord)=>{
+            let ind = this.state.keys.indexOf(cardRecord.key);
+            if (ind > 0){
+                this.setState({
+                    index: ind
+                });
+            }
+        });
     }
 
     removeCard(){
@@ -107,7 +113,14 @@ export class CardsetView extends React.Component {
             this.addCard(); 
         }
             
-        firebase.database().ref(this.getQuery()+'/cards/'+currentKey).remove();
+        firebase.database().ref(this.getQuery()+'/cards/'+currentKey).remove()
+        .then(()=>{
+            if (this.state.index > this.state.keys.length - 1){
+                this.setState({
+                    index: this.state.index - 1
+                });
+            }
+        });
     }
     
     render (){
