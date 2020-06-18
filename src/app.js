@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { CardsetView } from './CardsetView' 
+import { CardsetListView } from './CardsetListView'
 
 
 (function(){    
     if (location.hostname === "localhost") {
 
       var firebaseConfig = {
-        // Point to the RTDB emulator running on localhost.
-        // In almost all cases the ns (namespace) is your project ID.
         databaseURL: "http://localhost:9000?ns=noulli"
       }
 
@@ -19,7 +18,7 @@ import { CardsetView } from './CardsetView'
     class App extends React.Component {
         render (){
             return (
-                <CardsetView cardsetId="1a" />
+                <CardsetListView user="1a" />
             );
         }
     }
