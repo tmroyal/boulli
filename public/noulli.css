@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    background-color: #031c1a;
+    height: 100%;
+}
+
+body {
+    box-shadow: inset 0px 0px 5px grey;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fbfbfe;
+    width: 60%;
+    height: 100%;
+    padding: 3% 5%;
+    margin: 0 auto;
+}
+
+header {
+    border-bottom: 1px solid lightgrey;
+}
+
+#sitetitle {
+    font-size: 400%;
+    font-weight: 100;
+    color: #031c1a;
+}
+
+#sitesubtitle {
+    font-size: 150%;
+    font-weight: 200;
+    color: #031c1a;
+    display: inline-block;
+}
+
+.cardsetSelector {
+    background-color: #fafafc;
+    box-shadow: 1px 1px 2px lightgrey;
+    margin: 20px 0;
+    padding: 10px 8px;
+}
+
+.cardsetSelector:hover {
+    box-shadow: 1px 1px 2px #60728a;
+}
+
+.cardsetSelectorTitle {
+    font-size: 120%;
+    color: #478c96;
+}
+
+.cardsetSelectorDescription {
+    font-size: 90%;
+    font-weight: 200;
+    padding: 10px;
+}

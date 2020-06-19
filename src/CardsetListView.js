@@ -11,7 +11,13 @@ class CardsetListItem extends React.Component {
     }
 
     render (){
-        return <li>{ this.props.cardset.title } | { this.descriptionString() }</li>;
+        // TODO:--------------------- Start here --------------------------
+        return (
+            <div className="cardsetSelector">
+                <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
+                <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
+            </div>
+        );
     }
 }
 
@@ -23,6 +29,8 @@ export class CardsetListView extends React.Component {
         };
     }
 
+    // this will either load all cardsets if no user is specified
+    // or will load all public cardsets
     componentDidMount(){
         let ref;
         if (this.props.user){
@@ -46,7 +54,7 @@ export class CardsetListView extends React.Component {
         });
 
         return (
-            <ul>{ elementList }</ul>
+            <div className="mui-container-fluid">{ elementList }</div>
         );
 
     };
