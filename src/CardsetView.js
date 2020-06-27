@@ -2,7 +2,6 @@ import React from 'react'
 import { CardEditorViewer } from './CardView'
 import { NavButton, StateButton } from './Buttons' 
 
-
 class CardsetViewNav extends React.Component {
 
     render (){

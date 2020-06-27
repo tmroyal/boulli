@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { CardsetView } from './CardsetView' 
 import { CardsetListView } from './CardsetListView'
+import { Router, Link } from "@reach/router"
 
 
 (function(){    
@@ -14,11 +15,18 @@ import { CardsetListView } from './CardsetListView'
       var myApp = firebase.initializeApp(firebaseConfig);
       var db = myApp.database();
     }
+
     
     class App extends React.Component {
         render (){
             return (
-                <CardsetListView user="1a" />
+                <>
+                <Router>
+                    <CardsetView path="/cardset/:cardsetId" />
+                    <CardsetListView path="/cardsetlist/:user" />
+                </Router>
+                <Link to="/cardsetlist/1a">1a</Link>
+                </>
             );
         }
     }

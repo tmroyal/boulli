@@ -1,4 +1,6 @@
-const React = require('react');
+import React from 'react'
+import { Link } from "@reach/router"
+
 
 class CardsetListItem extends React.Component {
     descriptionString(){
@@ -11,12 +13,15 @@ class CardsetListItem extends React.Component {
     }
 
     render (){
-        // TODO:--------------------- Start here --------------------------
         return (
-            <div className="cardsetSelector">
-                <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
-                <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
-            </div>
+            <>
+                <Link className="routerLink" to={"/cardset/" + this.props.id }>
+                <div className="cardsetSelector">
+                    <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
+                    <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
+                </div>
+                </Link>
+            </>
         );
     }
 }
@@ -45,16 +50,20 @@ export class CardsetListView extends React.Component {
             });
         });
     }
+    
 
+    // next, onClick below will call the parent, and the parent will change the component to card
+   
     render(){
         const elementList = Object.keys(this.state.cardsets).map((cardset)=>{
             return <CardsetListItem 
                         key={cardset} 
+                        id={cardset}
                         cardset={this.state.cardsets[cardset]} />;
         });
 
         return (
-            <div className="mui-container-fluid">{ elementList }</div>
+            <div>{ elementList }</div>
         );
 
     };
