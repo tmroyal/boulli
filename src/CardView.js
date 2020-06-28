@@ -24,14 +24,18 @@ class CardEditor extends React.Component {
        this.props.titleChanged(event.target.value);
    }
     
-   textAreaChanged(event){
-       this.props.formulaChanged(event.target.value); 
+   frontChanged(event){
+       this.props.formulaChanged("front", event.target.value); 
+   }
+
+   backChanged(event){
+       this.props.formulaChanged("back", event.target.value); 
    }
     
     // TODO: hide editing button if wrong user
    render (){
-       const initValue = this.props.showingFront ?
-                             this.props.card.front : this.props.card.back;
+       const frontValue = this.props.card.front;
+       const backValue = this.props.card.back;
        const title = this.props.card.title;
        
        return (
@@ -42,11 +46,16 @@ class CardEditor extends React.Component {
                        value={ title }
                        onChange={ this.titleChanged.bind(this) }
                     />
-                   <label htmlFor="formula">Formula: </label>
+                   <label htmlFor="frontFormula">Front: </label>
                    <input 
-                       name="formula"
-                        value={ initValue }
-                        onChange={ this.textAreaChanged.bind(this) } />
+                       name="frontFormula"
+                        value={ frontValue }
+                        onChange={ this.frontChanged.bind(this) } />
+                   <label htmlFor="backFormula">Back: </label>
+                   <input 
+                       name="backFormula"
+                        value={ backValue }
+                        onChange={ this.backChanged.bind(this) } />
            </form>
        );
    } 
@@ -96,11 +105,11 @@ export class CardEditorViewer extends React.Component {
         this.forceUpdate();
     }
 
-    formulaChanged(value){
-        var key = this.state.showingFront ? "front" : "back";
+    formulaChanged(key, value){
         this.props.updateCard(key, value);
     }
-titleChanged(value) {
+
+    titleChanged(value) {
         this.props.updateCard("title", value);
     }
 
