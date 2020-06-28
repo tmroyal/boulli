@@ -98,10 +98,7 @@ export class CardEditorViewer extends React.Component {
     }
 
     toggleVisibleSide(){
-        this.setState({
-            showingFront: !this.state.showingFront
-        });
-
+        this.props.toggleSide();
         this.forceUpdate();
     }
 
@@ -126,10 +123,10 @@ export class CardEditorViewer extends React.Component {
                            <CardView 
                                 onClick={this.toggleVisibleSide.bind(this)}
                                 card={this.props.card} 
-                                showingFront={this.state.showingFront } /> 
+                                showingFront={this.props.showingFront } /> 
                         : <CardEditor 
                                 card={this.props.card} 
-                                showingFront={this.state.showingFront } 
+                                showingFront={this.props.showingFront } 
                                 formulaChanged={this.formulaChanged.bind(this)}
                                 titleChanged={this.titleChanged.bind(this)} />;
 
@@ -137,7 +134,7 @@ export class CardEditorViewer extends React.Component {
             <>
                 <CardViewStateButtons 
                     editing={this.state.editing}
-                    showingFront={this.state.showingFront}
+                    showingFront={this.props.showingFront}
                     toggleEditing={this.toggleEditing.bind(this)}
                     toggleVisibleSide={this.toggleVisibleSide.bind(this)}
                 />

@@ -37,6 +37,7 @@ export class CardsetView extends React.Component {
             cards: [],
             keys: [],
             index: 0,
+            showingFront: true
         }
     }
 
@@ -84,7 +85,14 @@ export class CardsetView extends React.Component {
         index %= this.state.keys.length;  
 
         this.setState({
+            showingFront: true,
             index: index
+        });
+    }
+
+    toggleVisibleSide(){
+        this.setState({
+            showingFront: !this.state.showingFront
         });
     }
     
@@ -129,12 +137,15 @@ export class CardsetView extends React.Component {
                 card={this.state.cards[currentCardKey]} 
                 updateCard={ this.updateCard.bind(this) }
                 saveCard={ this.saveCards.bind(this) }
+                showingFront= {this.state.showingFront} 
+                toggleSide={ this.toggleVisibleSide.bind(this) }
             /> : 
             <></>;
         return (
             <section>
                 { currentView }
                 <CardsetViewNav 
+                    showingFront= {this.state.showingFront} 
                     onNavigate={ this.navigateCards.bind(this) }
                     onAddCard={ this.addCard.bind(this) }
                     onRemoveCard={ this.removeCard.bind(this) }
