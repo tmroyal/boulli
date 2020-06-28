@@ -23,7 +23,7 @@ body {
 }
 
 header {
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 2px solid lightgrey;
 }
 
 #sitetitle {
@@ -54,8 +54,9 @@ header {
 }
 
 .cardView h3 {
+    font-size: 110%;
     padding-top: 2em;
-    font-weight: 400;
+    font-weight: 200;
 }
 
 .cardView .MathJax {
@@ -66,6 +67,36 @@ header {
     padding-top: 2em;
     padding-bottom: 2em;
 }
+
+form.cardEdit {
+    margin: 0;
+    padding: 2em;
+    font-weight: 200;
+}
+
+.cardEdit label {
+    font-size: 120%;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 25%;
+}
+
+.cardEdit input {
+    border-radius: 0;
+    border: 1px solid #f0f0f0;
+    font-size: 120%;
+    font-family: inherit;
+    font-weight: inherit;
+    margin: 1em 0;
+    padding: 0.5em; 
+    width: 100%;
+}
+
+.cardEdit input:focus {
+    outline: none;
+    border: 1px solid #a3acaa;
+}
+
 
 nav {
     margin: 1em 0;

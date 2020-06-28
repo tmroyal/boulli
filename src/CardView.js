@@ -34,19 +34,18 @@ class CardEditor extends React.Component {
        const title = this.props.card.title;
        
        return (
-           <form>
-               <div> 
+           <form className="cardEdit">
+                   <label htmlFor="cardTitle">Title: </label>
                    <input 
+                       name="cardTitle"
                        value={ title }
                        onChange={ this.titleChanged.bind(this) }
                     />
-               </div>
-               <div>
-                   <textarea 
+                   <label htmlFor="formula">Formula: </label>
+                   <input 
+                       name="formula"
                         value={ initValue }
-                        onChange={ this.textAreaChanged.bind(this) } >
-                   </textarea>
-               </div>
+                        onChange={ this.textAreaChanged.bind(this) } />
            </form>
        );
    } 
