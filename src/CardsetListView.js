@@ -41,7 +41,7 @@ export class CardsetListView extends React.Component {
         if (this.props.user){
             ref = firebase.database().ref('/users/'+this.props.user+'/cardsets');
         } else {
-            ref = firebase.database().ref(query).orderByChild('public').equalTo(true);
+            ref = firebase.database().ref('/cardsets/').orderByChild('public').equalTo(true);
         }
 
         ref.on('value', (s)=>{

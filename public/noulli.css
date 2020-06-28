@@ -26,6 +26,8 @@ header {
     border-bottom: 2px solid lightgrey;
 }
 
+a { text-decoration: none; }
+
 #sitetitle {
     font-size: 400%;
     font-weight: 100;
