@@ -11,12 +11,12 @@
             "cards": {
                 "1a": {
                     "title": "One plus One",
-                    "front": "$$1+1$$",
+                    "front": "1+1",
                     "back": "2"
                 },
                 "2b": {
                     "title": "",
-                    "front": "$$2+2$$",
+                    "front": "2+2",
                     "back": "4"
                 }
             }
@@ -42,12 +42,12 @@
             "cards": {
                 "1a": {
                     "title": "",
-                    "front": "$$2+3$$",
+                    "front": "2+3",
                     "back": "2"
                 },
                 "2": {
                     "title": "",
-                    "front": "$$2+2$$",
+                    "front": "2+2",
                     "back": "4"
                 }
             }
@@ -64,8 +64,8 @@
             "cards": {
                 "1a": {
                     "title": "Tan",
-                    "front": "$$x^2+a^2$$",
-                    "back": "$$a^2tan^2\\theta$$"
+                    "front": "x^2+a^2",
+                    "back": "a^2tan^2\\theta"
                 },
                 "2": {
                     "title": "Sec",

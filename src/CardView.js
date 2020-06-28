@@ -5,9 +5,10 @@ class CardView extends React.Component {
    render () {
        return (
            <div className="cardView" onClick={this.props.onClick}>
-                <h3>{ this.props.card.title }</h3>  
-                <p>{ this.props.showingFront ? 
-                    this.props.card.front : this.props.card.back }</p>
+                <h3>{ this.props.card.title || "--" }</h3>  
+                <p>
+           { "$$"+(this.props.showingFront ? 
+                    this.props.card.front : this.props.card.back)+"$$" }</p>
            </div>
        );
        
