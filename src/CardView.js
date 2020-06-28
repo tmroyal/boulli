@@ -4,11 +4,11 @@ import { NavButton, StateButton } from './Buttons'
 class CardView extends React.Component {
    render () {
        return (
-           <>
+           <div className="cardView" onClick={this.props.onClick}>
                 <h3>{ this.props.card.title }</h3>  
-                <p className="mui--text-display2">{ this.props.showingFront ? 
+                <p>{ this.props.showingFront ? 
                     this.props.card.front : this.props.card.back }</p>
-           </>
+           </div>
        );
        
    } 
@@ -34,14 +34,14 @@ class CardEditor extends React.Component {
        const title = this.props.card.title;
        
        return (
-           <form className="mui-form">
-               <div className="mui-textfield">
+           <form>
+               <div> 
                    <input 
                        value={ title }
                        onChange={ this.titleChanged.bind(this) }
                     />
                </div>
-               <div className="mui-textfield">
+               <div>
                    <textarea 
                         value={ initValue }
                         onChange={ this.textAreaChanged.bind(this) } >
@@ -55,14 +55,14 @@ class CardEditor extends React.Component {
 class CardViewStateButtons extends React.Component {
         render(){
             return (
-                <nav className="mui-row">
+                <nav>
                     <StateButton
-                        className="mui-btn mui-col-sm-4 mui-col-sm-offset-2"
                         onClick={this.props.toggleVisibleSide}
+                        imgsrc={"/img/rotate-" + (this.props.showingFront ? "ccw" : "cw") + ".svg"}
                         text={this.props.showingFront ? "Front" : "Back"} />
                     <StateButton
-                        className="mui-btn mui-col-sm-4"
                         onClick={this.props.toggleEditing}
+                        imgsrc={"/img/" + (this.props.editing ? "check-square.svg" : "edit.svg")}
                         text={this.props.editing ? "Done" : "Edit"} />
                 </nav>
             );
@@ -100,8 +100,7 @@ export class CardEditorViewer extends React.Component {
         var key = this.state.showingFront ? "front" : "back";
         this.props.updateCard(key, value);
     }
-
-    titleChanged(value) {
+titleChanged(value) {
         this.props.updateCard("title", value);
     }
 
@@ -116,6 +115,7 @@ export class CardEditorViewer extends React.Component {
     render (){
         var component = !this.state.editing ?
                            <CardView 
+                                onClick={this.toggleVisibleSide.bind(this)}
                                 card={this.props.card} 
                                 showingFront={this.state.showingFront } /> 
                         : <CardEditor 
@@ -123,6 +123,7 @@ export class CardEditorViewer extends React.Component {
                                 showingFront={this.state.showingFront } 
                                 formulaChanged={this.formulaChanged.bind(this)}
                                 titleChanged={this.titleChanged.bind(this)} />;
+
         return (
             <>
                 <CardViewStateButtons 
@@ -131,12 +132,8 @@ export class CardEditorViewer extends React.Component {
                     toggleEditing={this.toggleEditing.bind(this)}
                     toggleVisibleSide={this.toggleVisibleSide.bind(this)}
                 />
-                <div className="mui-row">
-                    <div className="mui-panel">
-                        <div className="mui--text-center">
-                            { component }
-                        </div>
-                    </div> 
+                <div className="raised">
+                { component }
                 </div>
             </>
         );

@@ -25,7 +25,6 @@ import { Router, Link } from "@reach/router"
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetListView path="/cardsetlist/:user" />
                 </Router>
-                <Link to="/cardsetlist/1a">1a</Link>
                 </>
             );
         }

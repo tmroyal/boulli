@@ -6,25 +6,25 @@ class CardsetViewNav extends React.Component {
 
     render (){
         return (
-            <nav className="mui-row">
+            <nav>
                 <NavButton 
                     direction="-1" 
-                    className="mui-btn mui-col-sm-2 mui-col-sm-offset-2"
                     onClick={this.props.onNavigate.bind(this,-1)}
-                    text="Left" />
+                    imgsrc="/img/arrow-left.svg"
+                    text="Next" />
                 <NavButton 
                     direction="1" 
-                    className="mui-btn mui-col-sm-2"
                     onClick={this.props.onNavigate.bind(this,1)}
-                    text="Right" />
+                    imgsrc="/img/arrow-right.svg"
+                    text="Prev." />
                 <StateButton 
-                    className="mui-btn mui-col-sm-2"
                     onClick={this.props.onAddCard}
-                    text="+" />
+                    imgsrc="/img/plus-square.svg"
+                    text="Add" />
                 <StateButton
-                    className="mui-btn mui-col-sm-2"
                     onClick={this.props.onRemoveCard}
-                    text="-" />
+                    imgsrc="/img/trash.svg"
+                    text="Delete" />
             </nav>
         );
     }

@@ -17,7 +17,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #fbfbfe;
     width: 60%;
-    height: 100%;
+    min-height: 100%;
     padding: 3% 5%;
     margin: 0 auto;
 }
@@ -39,15 +39,63 @@ header {
     display: inline-block;
 }
 
+.raised {
+    box-shadow: 1px 1px 2px lightgrey;
+}
+
+.raised:hover {
+    box-shadow: 1px 1px 2px #60728a;
+}
+
+.cardView {
+    min-height: 10em;
+    text-align: center;
+    margin: 0;
+}
+
+.cardView h3 {
+    padding-top: 2em;
+    font-weight: 400;
+}
+
+.cardView .MathJax {
+    font-size: 2em !important;
+}
+
+.cardView p {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+nav {
+    margin: 1em 0;
+}
+
+
+nav img {
+    padding-right: 5px;
+    vertical-align: middle;
+}
+nav button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 80%;
+    font-weight: 200;
+    margin-top: 0.4em 0.4em 0.4em 0em;
+    padding: 0.5em;
+    background: inherit;
+    border: none;
+    width: 25%;
+}
+
+
+
 .cardsetSelector {
     background-color: #fafafc;
-    box-shadow: 1px 1px 2px lightgrey;
     margin: 20px 0;
     padding: 10px 8px;
 }
 
 .cardsetSelector:hover {
-    box-shadow: 1px 1px 2px #60728a;
 }
 
 .cardsetSelectorTitle {
@@ -59,4 +107,8 @@ header {
     font-size: 90%;
     font-weight: 200;
     padding: 10px;
+}
+
+.cardview {
+    margin: auto;
 }

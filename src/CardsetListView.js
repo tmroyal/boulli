@@ -16,7 +16,7 @@ class CardsetListItem extends React.Component {
         return (
             <>
                 <Link className="routerLink" to={"/cardset/" + this.props.id }>
-                <div className="cardsetSelector">
+                <div className="raised cardsetSelector">
                     <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
                     <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
                 </div>

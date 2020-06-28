@@ -4,7 +4,7 @@ export class NavButton extends React.Component {
     render (){
         return (
             <StateButton 
-                className={this.props.className }
+                imgsrc={this.props.imgsrc}
                 text={this.props.text}
                 onClick={
                    ()=> this.props.onClick(this.props.direction)
@@ -16,9 +16,10 @@ export class NavButton extends React.Component {
 export class StateButton extends React.Component {
     render (){
        return (
-           <button className={ this.props.className }
+           <button className="navButton raised"
                onClick={
-                ()=>this.props.onClick() }>
+                ()=>this.props.onClick() } >
+               <img src={this.props.imgsrc} alt={this.props.text} />
                { this.props.text }
            </button>
        );
