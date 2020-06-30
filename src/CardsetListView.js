@@ -59,12 +59,15 @@ export class CardsetListView extends React.Component {
    
     render(){
         const keys = this.state.cardsets ? Object.keys(this.state.cardsets) : [];
-        const elementList = keys.map((cardset)=>{
+        let elementList = keys.map((cardset)=>{
             return <CardsetListItem 
                         key={cardset} 
                         id={cardset}
                         cardset={this.state.cardsets[cardset]} />;
         });
+        if (elementList.length == 0){
+            elementList = "Coming Soon";
+        }
 
         return (
             <div>{ elementList }</div>

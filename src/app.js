@@ -6,6 +6,7 @@ import { Router, Link } from "@reach/router"
 
 
 (function(){    
+    /*
     if (location.hostname === "localhost") {
 
         var firebaseConfig = {
@@ -15,14 +16,14 @@ import { Router, Link } from "@reach/router"
 
       var myApp = firebase.initializeTestApp(firebaseConfig);
       var db = myApp.database();
-    }
+    }*/
 
     class Header extends React.Component {
         render (){
             return (
                 <Link to="/">
                     <header>
-                        <p><span id="sitetitle">Noulli</span><span id="sitesubtitle"> math flashcards</span></p>
+                        <p><span id="sitetitle">Boulli</span><span id="sitesubtitle"> math flashcards</span></p>
                     </header>
                 </Link>
             );
