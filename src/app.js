@@ -8,11 +8,12 @@ import { Router, Link } from "@reach/router"
 (function(){    
     if (location.hostname === "localhost") {
 
-      var firebaseConfig = {
-        databaseURL: "http://localhost:9000?ns=noulli"
-      }
+        var firebaseConfig = {
+            databaseURL: "http://localhost:9000?ns=noulli",
+            auth: { uid: '1a' }
+        }
 
-      var myApp = firebase.initializeApp(firebaseConfig);
+      var myApp = firebase.initializeTestApp(firebaseConfig);
       var db = myApp.database();
     }
 

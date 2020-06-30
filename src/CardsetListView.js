@@ -58,7 +58,8 @@ export class CardsetListView extends React.Component {
     // next, onClick below will call the parent, and the parent will change the component to card
    
     render(){
-        const elementList = Object.keys(this.state.cardsets).map((cardset)=>{
+        const keys = this.state.cardsets ? Object.keys(this.state.cardsets) : [];
+        const elementList = keys.map((cardset)=>{
             return <CardsetListItem 
                         key={cardset} 
                         id={cardset}

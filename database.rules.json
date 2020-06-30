@@ -1,6 +1,59 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false
+      "cardsets": {
+          "$cardset_id": {
+                ".read": "data.child('public').val() == true || auth.uid == data.child('owner').val()",
+                ".write": "auth.uid == data.child('owner').val()",
+                ".validate": "newData.hasChildren(['owner', 'public', 'title', 'description', 'cards'])",
+                "owner": {
+                    ".validate": "newData.isString()"
+                },
+                "title": {
+                    ".validate": "newData.isString() && newData.val().length <= 32"
+                },
+                "descritpion": {
+                    ".validate": "newData.isString() && newData.val().length <= 128"
+                },
+                "public": {
+                    ".validate": "newData.isBoolean()"
+                },
+                "cards": {
+                    "$card_id": {
+                        ".validate": "newData.hasChildren(['title', 'front', 'back'])",
+                        "title": {
+                            ".validate": "newData.isString() && newData.val().length <= 128"
+                        },
+                        "front": {
+                            ".validate": "newData.isString() && newData.val().length <= 128"
+                        },
+                        "back": {
+                            ".validate": "newData.isString() && newData.val().length <= 128"
+                        }
+
+                    }
+                }
+          }
+      },
+      "users": {
+          "$uid": {
+              ".read": "$uid == auth.uid",
+              ".write": "$uid == auth.uid",
+              ".validate": "newData.hasChildren(['displayName', 'cardsets'])",
+              "displayName": {
+                    ".validate": "newData.isString() && newData.val().length <= 32"
+              },
+              "cardsets": {
+                  "$cardset_id": {
+                    ".validate": "newData.hasChildren(['title', 'description'])",
+                    "title": {
+                        ".validate": "newData.isString() && newData.val().length <= 32"
+                    },
+                    "description": {
+                        ".validate": "newData.isString() && newData.val().length <= 128"
+                    }
+                  }
+              }
+          }
+      }
   }
 }
