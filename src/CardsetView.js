@@ -39,12 +39,15 @@ export class CardsetView extends React.Component {
             index: 0,
             showingFront: true
         }
+        this.dbRef = null;
     }
 
     componentDidMount(){
         let query = this.getQuery();
 
-        firebase.database().ref(query).on('value', (snapshot)=>{
+        this.dbRef = firebase.database().ref(query);
+
+        this.dbRef.on('value', (snapshot)=>{
             let cards = snapshot.val().cards;
             let keys = Object.keys(cards);
 
@@ -53,6 +56,10 @@ export class CardsetView extends React.Component {
                 keys: keys, 
             });
         });
+    }
+
+    componentWillUnmount(){
+        if (this.dbRef){ this.dbRef.off('value'); }
     }
 
     getQuery(){

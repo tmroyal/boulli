@@ -32,25 +32,28 @@ export class CardsetListView extends React.Component {
         this.state = {
             cardsets: {}
         };
+        this.dbRef = null;
     }
 
     // this will either load all cardsets if no user is specified
     // or will load all public cardsets
     componentDidMount(){
-        let ref;
         if (this.props.user){
-            ref = firebase.database().ref('/users/'+this.props.user+'/cardsets');
+            this.dbRef = firebase.database().ref('/users/'+this.props.user+'/cardsets');
         } else {
-            ref = firebase.database().ref('/cardsets/').orderByChild('public').equalTo(true);
+            this.dbRef = firebase.database().ref('/cardsets/').orderByChild('public').equalTo(true);
         }
 
-        ref.on('value', (s)=>{
+        this.dbRef.on('value', (s)=>{
             this.setState({
                 cardsets: s.val()
             });
         });
     }
     
+    componentWillUnmount(){
+        if (this.dbRef){ this.dbRef.off('value'); }
+    }
 
     // next, onClick below will call the parent, and the parent will change the component to card
    
