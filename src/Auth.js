@@ -6,15 +6,15 @@ import { ErrorMessage } from '@hookform/error-message';
 
 function InputComponent(props){
     return (
-        <>
+        <div>
             <label htmlFor={props.name} >{ props.label }: </label>
             <input 
                 name={props.name}
                 ref={props.registration}
                 className={ props.errors[props.name] ? "invalid" : "" } 
                 />
-            <ErrorMessage errors={props.errors} name={props.name} />
-        </>
+            <div className="errorMessage"><ErrorMessage errors={props.errors} name={props.name} /></div>
+        </div>
     );
 }
 
@@ -71,6 +71,7 @@ export function SignUpForm(){
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <h3>Sign up to create and save cards</h3>
             <InputComponent 
                 name="displayName" 
                 label="Username" 
@@ -101,8 +102,7 @@ export function SignUpForm(){
                 registration={register(passwordConfirmValidation)} 
                 errors={ errors }
             />
-            <input type="submit" value="Sign Up" />
-            <button onClick={ ()=>console.log(watch('displayName')) } >HERE</button>
+            <input type="submit" id="signupButton" value="Sign Up" />
         </form>
     );
 }

@@ -29,9 +29,6 @@ header {
 
 a { text-decoration: none; }
 
-form input.invalid {
-    background-color: #ffaaaa;
-}
 
 #sitetitle {
     font-size: 400%;
@@ -88,27 +85,70 @@ form.cardEdit {
     width: 25%;
 }
 
-.cardEdit input {
+.cardEdit input, form input {
     border-radius: 0;
     border: 1px solid #f0f0f0;
     font-size: 120%;
     font-family: inherit;
     font-weight: inherit;
-    margin: 1em 0;
     padding: 0.5em; 
     width: 100%;
 }
 
-.cardEdit input:focus {
+.cardEdit input {
+    margin: 1em 0;
+}
+
+.cardEdit input:focus, form input:focus {
     outline: none;
     border: 1px solid #a3acaa;
 }
 
+form input.invalid {
+    background-color: #ffaaaa;
+}
+
+form label {
+    margin: 0;
+    padding: 0 0.5em 1em 0;
+}
+
+form input {
+    width: 100%;
+}
+
+form div.errorMessage {
+    height: 2em;
+    font-size: 80%;
+}
+
+form #signupButton {
+    background-color: #093d42;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    color: white;
+    box-shadow: 2px 2px 5px lightgrey;
+    border: none;
+}
+
+form #signupButton:hover, form #signupButton:focus {
+    background-color: #106a73;
+}
+
+form {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 2px solid lightgrey;
+}
+
+form h3 {
+    padding: 1em 0;
+}
 
 nav {
     margin: 1em 0;
 }
-
 
 nav img {
     padding-right: 5px;

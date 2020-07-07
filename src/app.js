@@ -27,14 +27,15 @@ import { SignUpForm, SignInForm } from './Auth'
         render (){
             return (
                 <>
-                <SignUpForm/>
                 <Header/>
                 <NavBar user={this.state.user} />
+                <SignUpForm/>
+                { /*
                 <Router>
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetListView path="/cardsetlist/:user" />
                     <CardsetListView path="/" />
-                </Router>
+                </Router> */ }
                 </>
             );
         }
