@@ -2,43 +2,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { CardsetView } from './CardsetView' 
 import { CardsetListView } from './CardsetListView'
-import { Router, Link } from "@reach/router"
+import { Router, Link } from '@reach/router'
+import { Header, NavBar } from './NavBars'
+import { SignUpForm, SignInForm } from './Auth'
 
-
-(function(){    
-    /*
-    if (location.hostname === "localhost") {
-
-        var firebaseConfig = {
-            databaseURL: "http://localhost:9000?ns=noulli",
-            auth: { uid: '1a' }
-        }
-
-      var myApp = firebase.initializeTestApp(firebaseConfig);
-      var db = myApp.database();
-    }*/
-
-    class Header extends React.Component {
-        render (){
-            return (
-                <Link to="/">
-                    <header>
-                        <p><span id="sitetitle">Boulli</span><span id="sitesubtitle"> math flashcards</span></p>
-                    </header>
-                </Link>
-            );
-        }
-    }
-    
-    // site heading, when clicked, goes back to top level
-    // top level shows all cardsets
-    // top level shows option for my cardsets
-    // each card shows option for cardset list
+(function(){   
     class App extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                user: null
+            }
+        }
+
+        componentDidMount (){
+            firebase.auth().onAuthStateChanged((user)=>{
+                this.setState({
+                    user: user
+                });
+            });
+        }
+        
+        // set user in nav bar
         render (){
             return (
                 <>
+                <SignUpForm/>
                 <Header/>
+                <NavBar user={this.state.user} />
                 <Router>
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetListView path="/cardsetlist/:user" />

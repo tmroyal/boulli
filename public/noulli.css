@@ -12,6 +12,7 @@ a.routerLink {
     text-decoration: none;
 }
 
+
 body {
     box-shadow: inset 0px 0px 5px grey;
     font-family: 'Montserrat', sans-serif;
@@ -27,6 +28,10 @@ header {
 }
 
 a { text-decoration: none; }
+
+form input.invalid {
+    background-color: #ffaaaa;
+}
 
 #sitetitle {
     font-size: 400%;
