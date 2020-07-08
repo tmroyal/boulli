@@ -146,6 +146,14 @@ form h3 {
     padding: 1em 0;
 }
 
+form div#pwreset{
+    font-size: 80%;
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+    padding-top: 0.5em;
+}
+
 nav {
     margin: 1em 0;
 }
