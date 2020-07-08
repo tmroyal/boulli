@@ -139,7 +139,6 @@ form #signupButton:hover, form #signupButton:focus {
 form {
     margin-top: 1em;
     padding-top: 1em;
-    border-top: 2px solid lightgrey;
 }
 
 form h3 {
@@ -156,6 +155,8 @@ form div#pwreset{
 
 nav {
     margin: 1em 0;
+    padding-bottom: 1em;
+    border-bottom: 2px solid lightgrey;
 }
 
 nav img {
