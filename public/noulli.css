@@ -163,6 +163,21 @@ nav img {
     padding-right: 5px;
     vertical-align: middle;
 }
+
+a.navLink {
+    display: inline-block;
+    background-color: lightgrey;
+    color: white;
+    padding: 0.3em 1em;
+    background-color: #093d42;
+    box-shadow: 2px 2px 2px lightgrey;
+    margin: 0 0.5em 0 0;
+}
+
+a.navLink:hover, a.navLink:focus {
+    background-color: #106a73;
+}
+
 nav button {
     font-family: 'Montserrat', sans-serif;
     font-size: 80%;

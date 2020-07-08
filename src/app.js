@@ -33,6 +33,8 @@ import { SignUpForm, SignInForm } from './Auth'
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetListView path="/cardsetlist/:user" />
                     <CardsetListView path="/" />
+                    <SignUpForm path="/signup" />
+                    <SignInForm path="/signin" />
                 </Router> 
                 </>
             );

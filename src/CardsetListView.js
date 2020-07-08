@@ -66,7 +66,7 @@ export class CardsetListView extends React.Component {
                         cardset={this.state.cardsets[cardset]} />;
         });
         if (elementList.length == 0){
-            elementList = "Coming Soon";
+            elementList = "Loading";
         }
 
         return (
