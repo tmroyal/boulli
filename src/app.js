@@ -4,21 +4,22 @@ import { CardsetView } from './CardsetView'
 import { CardsetListView } from './CardsetListView'
 import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
-import { SignUpForm, SignInForm } from './Auth'
+import { Logout, SignUpForm, SignInForm } from './Auth'
+import { ErrorPath } from './ErrorPaths'
 
 (function(){   
     class App extends React.Component {
         constructor(props){
             super(props);
             this.state = {
-                user: null
+                user: '1a'
             }
         }
 
         componentDidMount (){
             firebase.auth().onAuthStateChanged((user)=>{
                 this.setState({
-                    user: user
+                    user: '1a'
                 });
             });
         }
@@ -31,10 +32,12 @@ import { SignUpForm, SignInForm } from './Auth'
                 <NavBar user={this.state.user} />
                 <Router>
                     <CardsetView path="/cardset/:cardsetId" />
-                    <CardsetListView path="/cardsetlist/:user" />
+                    <CardsetListView user={this.state.user} path="/mycards" />
                     <CardsetListView path="/" />
                     <SignUpForm path="/signup" />
                     <SignInForm path="/signin" />
+                    <ErrorPath path="/error/:error" />
+                    <ErrorPath error="notfound" default />
                 </Router> 
                 </>
             );

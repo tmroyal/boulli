@@ -4,7 +4,13 @@ import { Link } from "@reach/router"
 
 class UserNavbar extends React.Component {
     render (){
-       return <p>Logout | My Cards | Create new Cards</p>;
+        return (
+            <div>
+                <Link to="/logout" className="navLink">Logout</Link> 
+                <Link to="/mycards" className="navLink">My Cards</Link> 
+                <Link to="/newcard" className="navLink">New Cards</Link>
+            </div>
+        );
     }
 }
 

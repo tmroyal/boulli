@@ -1,8 +1,7 @@
 import { Link, navigate } from "@reach/router"
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
-
 
 function InputComponent(props){
     return (
@@ -16,6 +15,20 @@ function InputComponent(props){
                 />
             <div className="errorMessage"><ErrorMessage errors={props.errors} name={props.name} /></div>
         </div>
+    );
+}
+
+export function Logout(){
+    useEffect(()=>{
+        firebase.auth().signOut.then(function(){
+            navigate('/');
+        }).catch(function(){
+            navigate('/error/logout');
+        });
+    });
+
+    return (
+        <h1>Logging out</h1>
     );
 }
 

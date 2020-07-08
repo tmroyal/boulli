@@ -2,7 +2,7 @@ import React from 'react'
 
 export function ErrorPath(props){
     const messages = {
-        'notfound': 'File not found', 
+        'notfound': 'Path not found.', 
         'logout': 'Logout failed. Please try again.'
     };
 
