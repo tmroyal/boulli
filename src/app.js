@@ -8,18 +8,20 @@ import { Logout, SignUpForm, SignInForm } from './Auth'
 import { ErrorPath } from './ErrorPaths'
 
 (function(){   
+
     class App extends React.Component {
         constructor(props){
             super(props);
             this.state = {
-                user: '1a'
+                user: null
             }
         }
 
         componentDidMount (){
             firebase.auth().onAuthStateChanged((user)=>{
+                console.log(user);
                 this.setState({
-                    user: '1a'
+                    user: user
                 });
             });
         }

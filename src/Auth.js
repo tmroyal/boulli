@@ -18,6 +18,16 @@ function InputComponent(props){
     );
 }
 
+function FormError(props){
+    if (props.errorMessage){
+        return (
+            <div className="formError">props.errorMessage</div>
+        );
+    } else {
+        return "";
+    }
+}
+
 export function Logout(){
     useEffect(()=>{
         firebase.auth().signOut().then(function(){
@@ -32,40 +42,19 @@ export function Logout(){
     );
 }
 
-// ******************8 TODO!!!!! ********************
-// ******************8 TODO!!!!! ********************
-// ******************8 TODO!!!!! ********************
-// ******************8 TODO!!!!! ********************
-// start blindly implementing login functions from
-// https://firebase.google.com/docs/auth/web/password-auth
-// ******************8 TODO!!!!! ********************
-// ******************8 TODO!!!!! ********************
-// ******************8 TODO!!!!! ********************
-
 export function SignUpForm(){
     const { register, handleSubmit, watch, errors } = useForm();
 
+    const [errorMessage, setErrorMessage] = useState(0);
+
     const onSubmit = (data) => {
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-            .then(function(result) {
-                return result.user.updateProfile({
-                    displayName: document.getElementById("name").value
-                })
-            }).catch(function(error) {
-                console.log(error);
-            });
-        };
-
-    const displayNameValidation = {
-        required: 'Username is required',
-        minLength: {
-            value: 4,
-            message: 'Username must be between 4 and 32 characters'
-        },
-        maxLength: {
-            value: 32, 
-            message: 'Username must be between 4 and 32 characters'
-        }
+        .then(function(user){
+            navigate("/mycards");
+        })
+        .catch(function(error) {
+            setErrorMessage(error.message);
+        });
     };
 
     const emailValidation = {
@@ -106,12 +95,7 @@ export function SignUpForm(){
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Sign up to create and save cards</h3>
-            <InputComponent 
-                name="displayName" 
-                label="Username" 
-                registration={register(displayNameValidation)}
-                errors={errors}
-            />
+            <FormError errorMessage={ errorMessage } />
             <InputComponent 
                 name="email" 
                 label="Email" 
@@ -147,8 +131,6 @@ export function SignInForm(){
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => console.log(data);
 
-      
-    
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Login</h3>
@@ -169,10 +151,5 @@ export function SignInForm(){
             <div id="pwreset"><a href="pwreset">Forgot password?</a></div>
         </form>
     );
-    // email
-    // pw
-    // success navigate
-    // fail, notify
-    // forgot password link
 }
 

@@ -40,9 +40,6 @@
               ".read": "$uid == auth.uid",
               ".write": "$uid == auth.uid",
               ".validate": "newData.hasChildren(['displayName', 'cardsets'])",
-              "displayName": {
-                    ".validate": "newData.isString() && newData.val().length <= 32"
-              },
               "cardsets": {
                   "$cardset_id": {
                     ".validate": "newData.hasChildren(['title', 'description'])",
