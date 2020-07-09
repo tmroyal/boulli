@@ -20,7 +20,7 @@ function InputComponent(props){
 
 export function Logout(){
     useEffect(()=>{
-        firebase.auth().signOut.then(function(){
+        firebase.auth().signOut().then(function(){
             navigate('/');
         }).catch(function(){
             navigate('/error/logout');
@@ -32,9 +32,29 @@ export function Logout(){
     );
 }
 
+// ******************8 TODO!!!!! ********************
+// ******************8 TODO!!!!! ********************
+// ******************8 TODO!!!!! ********************
+// ******************8 TODO!!!!! ********************
+// start blindly implementing login functions from
+// https://firebase.google.com/docs/auth/web/password-auth
+// ******************8 TODO!!!!! ********************
+// ******************8 TODO!!!!! ********************
+// ******************8 TODO!!!!! ********************
+
 export function SignUpForm(){
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const onSubmit = (data) => {
+        firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+            .then(function(result) {
+                return result.user.updateProfile({
+                    displayName: document.getElementById("name").value
+                })
+            }).catch(function(error) {
+                console.log(error);
+            });
+        };
 
     const displayNameValidation = {
         required: 'Username is required',

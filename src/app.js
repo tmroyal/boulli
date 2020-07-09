@@ -36,6 +36,7 @@ import { ErrorPath } from './ErrorPaths'
                     <CardsetListView path="/" />
                     <SignUpForm path="/signup" />
                     <SignInForm path="/signin" />
+                    <Logout path="/logout" />
                     <ErrorPath path="/error/:error" />
                     <ErrorPath error="notfound" default />
                 </Router> 
