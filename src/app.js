@@ -19,14 +19,12 @@ import { ErrorPath } from './ErrorPaths'
 
         componentDidMount (){
             firebase.auth().onAuthStateChanged((user)=>{
-                console.log(user);
                 this.setState({
                     user: user
                 });
             });
         }
         
-        // set user in nav bar
         render (){
             return (
                 <>

@@ -129,11 +129,21 @@ export function SignUpForm(){
 
 export function SignInForm(){ 
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => console.log(data);
+    const [errorMessage, setErrorMessage] = useState(0);
+
+    const onSubmit = (data) => {
+        firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+        .then(function(user){
+            navigate("/mycards");
+        }).catch(function(error) {
+            setErrorMessage(error.message);
+        });
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Login</h3>
+            <FormError errorMessage={ errorMessage } />
             <InputComponent
                 name="email"
                 label="Email Address"
