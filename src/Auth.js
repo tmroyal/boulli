@@ -21,7 +21,7 @@ function InputComponent(props){
 function FormError(props){
     if (props.errorMessage){
         return (
-            <div className="formError">props.errorMessage</div>
+            <div className="formError">{ props.errorMessage }</div>
         );
     } else {
         return "";

@@ -189,7 +189,9 @@ nav button {
     width: 25%;
 }
 
-
+.formError {
+    padding: 1em 0;
+}
 
 .cardsetSelector {
     background-color: #fafafc;

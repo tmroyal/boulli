@@ -7,20 +7,23 @@ import { Header, NavBar } from './NavBars'
 import { Logout, SignUpForm, SignInForm } from './Auth'
 import { ErrorPath } from './ErrorPaths'
 
+
+// DEPLOY AND TEST!!!
+
 (function(){   
 
     class App extends React.Component {
         constructor(props){
             super(props);
             this.state = {
-                user: null
+                user: firebase.auth().currentUser
             }
         }
 
         componentDidMount (){
             firebase.auth().onAuthStateChanged((user)=>{
                 this.setState({
-                    user: user
+                    user: firebase.auth().currentUser
                 });
             });
         }
@@ -32,8 +35,8 @@ import { ErrorPath } from './ErrorPaths'
                 <NavBar user={this.state.user} />
                 <Router>
                     <CardsetView path="/cardset/:cardsetId" />
-                    <CardsetListView user={this.state.user} path="/mycards" />
-                    <CardsetListView path="/" />
+                    <CardsetListView type="user" user={this.state.user} path="/mycards" />
+                    <CardsetListView type="all" path="/" />
                     <SignUpForm path="/signup" />
                     <SignInForm path="/signin" />
                     <Logout path="/logout" />
