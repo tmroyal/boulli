@@ -50,6 +50,10 @@ export function SignUpForm(){
     const onSubmit = (data) => {
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(function(user){
+            user.sendEmailVerification();
+            // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#applyactioncode
+            // to validate
+
             navigate("/mycards");
         })
         .catch(function(error) {

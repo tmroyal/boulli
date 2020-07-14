@@ -11,12 +11,12 @@ class CardsetViewNav extends React.Component {
                     direction="-1" 
                     onClick={this.props.onNavigate.bind(this,-1)}
                     imgsrc="/img/arrow-left.svg"
-                    text="Next" />
+                    text="Prev." />
                 <NavButton 
                     direction="1" 
                     onClick={this.props.onNavigate.bind(this,1)}
                     imgsrc="/img/arrow-right.svg"
-                    text="Prev." />
+                    text="Next" />
                 <StateButton 
                     onClick={this.props.onAddCard}
                     imgsrc="/img/plus-square.svg"

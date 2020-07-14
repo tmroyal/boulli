@@ -6,6 +6,7 @@ import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
 import { Logout, SignUpForm, SignInForm } from './Auth'
 import { ErrorPath } from './ErrorPaths'
+import { EmailFunctions } from './EmailFunctions'
 
 
 // DEPLOY AND TEST!!!
@@ -40,6 +41,7 @@ import { ErrorPath } from './ErrorPaths'
                     <SignUpForm path="/signup" />
                     <SignInForm path="/signin" />
                     <Logout path="/logout" />
+                    <EmailFunctions path="/auth_function/action" />
                     <ErrorPath path="/error/:error" />
                     <ErrorPath error="notfound" default />
                 </Router> 
