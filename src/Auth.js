@@ -2,31 +2,7 @@ import { Link, navigate } from "@reach/router"
 import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
-
-function InputComponent(props){
-    return (
-        <div>
-            <label htmlFor={props.name} >{ props.label }: </label>
-            <input 
-                name={props.name}
-                ref={props.registration}
-                className={ props.errors[props.name] ? "invalid" : "" } 
-                type = { props.isPassword ? "password" : "text" }
-                />
-            <div className="errorMessage"><ErrorMessage errors={props.errors} name={props.name} /></div>
-        </div>
-    );
-}
-
-function FormError(props){
-    if (props.errorMessage){
-        return (
-            <div className="formError">{ props.errorMessage }</div>
-        );
-    } else {
-        return "";
-    }
-}
+import { InputComponent, FormError } from './FormControls';
 
 export function Logout(){
     useEffect(()=>{
@@ -51,8 +27,6 @@ export function SignUpForm(){
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(function(user){
             user.sendEmailVerification();
-            // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#applyactioncode
-            // to validate
 
             navigate("/mycards");
         })
