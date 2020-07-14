@@ -21,7 +21,7 @@ export function Logout(){
 export function SignUpForm(){
     const { register, handleSubmit, watch, errors } = useForm();
 
-    const [errorMessage, setErrorMessage] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
@@ -107,7 +107,7 @@ export function SignUpForm(){
 
 export function SignInForm(){ 
     const { register, handleSubmit, watch, errors } = useForm();
-    const [errorMessage, setErrorMessage] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
         firebase.auth().signInWithEmailAndPassword(data.email, data.password)
@@ -136,7 +136,7 @@ export function SignInForm(){
                 isPassword="true"
             />
             <input type="submit" id="signupButton" value="Sign In" />
-            <div id="pwreset"><a href="pwreset">Forgot password?</a></div>
+            <div id="pwreset"><a href="/password_reset">Forgot password?</a></div>
         </form>
     );
 }

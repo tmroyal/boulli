@@ -29,6 +29,9 @@ header {
 
 a { text-decoration: none; }
 
+form p {
+  padding-bottom: 1em;
+}
 
 #sitetitle {
     font-size: 400%;

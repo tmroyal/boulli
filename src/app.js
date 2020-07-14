@@ -6,7 +6,7 @@ import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
 import { Logout, SignUpForm, SignInForm } from './Auth'
 import { ErrorPath } from './ErrorPaths'
-import { EmailFunctions } from './EmailFunctions'
+import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
 
 
 // DEPLOY AND TEST!!!
@@ -42,6 +42,7 @@ import { EmailFunctions } from './EmailFunctions'
                     <SignInForm path="/signin" />
                     <Logout path="/logout" />
                     <EmailFunctions path="/auth_function/action" />
+                    <ResetPasswordView path="/password_reset" />
                     <ErrorPath path="/error/:error" />
                     <ErrorPath error="notfound" default />
                 </Router> 
