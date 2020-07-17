@@ -11,7 +11,7 @@ export function Logout(){
         }).catch(function(){
             navigate('/error/logout');
         });
-    });
+    },[]);
 
     return (
         <h1>Logging out</h1>
@@ -224,7 +224,6 @@ function ChangePasswordForm(){
         }
     };
 
-
     return (
       <form>
         <h3>Change Email Address</h3>
@@ -266,7 +265,7 @@ export function AccountSettings(){
     } else {
       setEmailAddress(firebase.auth().currentUser.email);
     }
-  });
+  },[]);
 
   return (
     <>

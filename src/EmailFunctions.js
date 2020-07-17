@@ -197,7 +197,7 @@ function ResetPasswordEmailView(props){
     }).catch(function(error){
       setResetPasswordState('form');    
     });
-  });
+  },[]);
   
   switch (resetPasswordState){
     case 'form':
@@ -225,11 +225,6 @@ function ResetPasswordEmailView(props){
   );
 }
 
-// Reset email form
-// Labeled as "account" on ui
- 
-
-
 /* -----------------------
  * Recover email functionality
  * -----------------------
@@ -237,16 +232,29 @@ function ResetPasswordEmailView(props){
  * through following a link in their email. The below implements this workflow.
  */
 
-// TODO
-// 1. Go to https://firebase.google.com/docs/auth/custom-email-handler find number 3
-// 2. Make a flowchart of the above flow
-// 3. Implement as you did above
-// 4. Do the same as you did for VerifyEmail view
-// 5. Push, test, and debug
-
 function RecoverEmail(props){
+  const [recoveryState, setRecoveryState] = useState('Preparing to Recover Email');
+
+  var restoredEmail = null;
+
+  useEffect(()=>{
+    auth.checkActionCode(props.query.oobCode)
+    .then(function(info){
+      restoreEmail = info.data.email;
+      setRecoveryState('Setting email to '+restoredEmail);
+      return auth.applyActionCode(props.query.oobCode);
+    })
+    .then(function(){
+      setRecoveryState('Email set to'+restoredEmail);
+    })
+    .catch(function(error){
+      setRecoveryState(error.message);
+    });
+    
+  },[]);
+
   return (
-    <h1>Recovr Email</h1>
+    <p>{ recoveryState }</p>
   );
 }
 
@@ -254,11 +262,28 @@ function RecoverEmail(props){
  * Verify email functionality
  */
 
+
 function VerifyEmail(props){
+  const [verifyState, setVerifyState] = useState('Verifying Email');
+
+  useEffect(()=>{
+    auth.applyActionCode(actionCode).then(function(resp) {
+      navigate('/mycards');
+    })
+    .catch(function(error){
+      setVerifyState(error.message);
+    });;
+  },[]);
+
   return (
-    <h1>Verify Email</h1>
+    <p>{ verifyState }</p>
   );
 }
+
+/***
+ * Component switcher
+ * based on query string mode */
+
 
 function getComponent(qs){
   switch (qs.mode){
