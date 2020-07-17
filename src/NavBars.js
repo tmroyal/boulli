@@ -9,6 +9,7 @@ class UserNavbar extends React.Component {
                 <Link to="/logout" className="navLink">Logout</Link> 
                 <Link to="/mycards" className="navLink">My Cards</Link> 
                 <Link to="/newcard" className="navLink">New Cards</Link>
+                <Link to="/account" className="navLink">Account Settings</Link>
             </div>
         );
     }

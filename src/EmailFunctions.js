@@ -183,24 +183,23 @@ function ResetPasswordEmailSuccess(props){
 function ResetPasswordEmailView(props){
   let component;
 
-  // TODO: rename the below variable
-  const [componentState, setComponentState] = useState('');
+  const [resetPasswordState, setResetPasswordState] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSuccess = ()=>{
-    setComponentState('success');
+    setResetPasswordState('success');
   };
 
   useEffect(()=>{
     auth.verifyPasswordResetCode(props.query.oobCode).then(function(email){
       setEmail(email);
-      setComponentState('form');    
+      setResetPasswordState('form');    
     }).catch(function(error){
-      setComponentError('form');    
+      setResetPasswordState('form');    
     });
   });
   
-  switch (componentState){
+  switch (resetPasswordState){
     case 'form':
       component = <ResetPasswordEmailForm 
                     email={email} 
@@ -226,10 +225,25 @@ function ResetPasswordEmailView(props){
   );
 }
 
+// Reset email form
+// Labeled as "account" on ui
+ 
+
+
 /* -----------------------
  * Recover email functionality
  * -----------------------
+ * Firebase allows the client to reset any email changes that are requested
+ * through following a link in their email. The below implements this workflow.
  */
+
+// TODO
+// 1. Go to https://firebase.google.com/docs/auth/custom-email-handler find number 3
+// 2. Make a flowchart of the above flow
+// 3. Implement as you did above
+// 4. Do the same as you did for VerifyEmail view
+// 5. Push, test, and debug
+
 function RecoverEmail(props){
   return (
     <h1>Recovr Email</h1>

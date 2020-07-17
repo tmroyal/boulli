@@ -4,7 +4,7 @@ import { CardsetView } from './CardsetView'
 import { CardsetListView } from './CardsetListView'
 import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
-import { Logout, SignUpForm, SignInForm } from './Auth'
+import { Logout, SignUpForm, SignInForm, AccountSettings } from './Auth'
 import { ErrorPath } from './ErrorPaths'
 import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
 
@@ -42,6 +42,7 @@ import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
                     <SignInForm path="/signin" />
                     <Logout path="/logout" />
                     <EmailFunctions path="/auth_function/action" />
+                    <AccountSettings path="/account" />
                     <ResetPasswordView path="/password_reset" />
                     <ErrorPath path="/error/:error" />
                     <ErrorPath error="notfound" default />
