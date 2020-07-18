@@ -1,7 +1,7 @@
 {
   "rules": {
       "cardsets": {
-          ".read": "query.orderByChild == 'public' && query.equalTo == true",
+          ".read": "(query.orderByChild == 'owner' && query.equalTo == auth.uid) || (query.orderByChild == 'public' && query.equalTo == true)",
           "$cardset_id": {
                 ".read": "data.child('public').val() == true || auth.uid == data.child('owner').val()",
                 ".write": "(auth != null && !data.exists()) || (data.exists() && auth.uid == data.child('owner').val())",

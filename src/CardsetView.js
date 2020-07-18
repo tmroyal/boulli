@@ -123,8 +123,8 @@ export class CardsetView extends React.Component {
         this.dbRef = firebase.database().ref(query);
 
         this.dbRef.on('value', (snapshot)=>{
-            let cards = snapshot.val().cards;
-            let keys = Object.keys(cards);
+            let cards = snapshot.val().cards || {};
+            let keys = Object.keys(cards) || [];
 
             this.setState({
                 cards: cards,
@@ -180,8 +180,8 @@ export class CardsetView extends React.Component {
     addCard(){
         let newCard = {
             title: "",
-            front: "$$=$$",
-            back: "$$=$$"
+            front: "1+1",
+            back: "=2"
         }
 
         firebase.database().ref(this.getQuery()+'/cards').push(newCard)

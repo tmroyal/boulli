@@ -43,9 +43,9 @@ export class CardsetListView extends React.Component {
 
     api(){
         if (this.props.type=="user" && this.props.user){
-            this.dbRef = firebase.database().ref('/users/'+this.props.user.uid+'/cardsets');
+            this.dbRef = firebase.database().ref('/cardsets/')
+                          .orderByChild('owner').equalTo(this.props.user.uid);
         } else if (this.props.type=="all") {
-            // maybe redirect?
             this.dbRef = firebase.database().ref('/cardsets/').orderByChild('public').equalTo(true);
         }
 
@@ -59,8 +59,7 @@ export class CardsetListView extends React.Component {
     }
 
     componentDidUpdate(){
-        if (this.props.type=="user" && this.props.user){
-            if (this.dbRef){ this.dbRef.off('value'); }
+        if (this.props.type=="user" && this.props.user && !this.dbRef){
             this.api();
         }
     }
