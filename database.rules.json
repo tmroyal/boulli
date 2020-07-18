@@ -34,24 +34,6 @@
                     }
                 }
           }
-      },
-      "users": {
-          "$uid": {
-              ".read": "$uid == auth.uid",
-              ".write": "$uid == auth.uid",
-              ".validate": "newData.hasChildren(['displayName', 'cardsets'])",
-              "cardsets": {
-                  "$cardset_id": {
-                    ".validate": "newData.hasChildren(['title', 'description'])",
-                    "title": {
-                        ".validate": "newData.isString() && newData.val().length <= 32"
-                    },
-                    "description": {
-                        ".validate": "newData.isString() && newData.val().length <= 128"
-                    }
-                  }
-              }
-          }
       }
   }
 }

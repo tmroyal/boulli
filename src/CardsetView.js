@@ -45,18 +45,21 @@ function CardsetEditForm(props){
     const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
+      // TODO: implement edit flow
 
       const newRecord = {
         public: data.public,
         owner: props.user.uid,
         title: data.title,
         description: data.description, 
-        cards: {}
       };
 
       firebase.database().ref('cardsets').push(newRecord)
       .then((ref)=>{
         navigate('/cardset/'+ref.key);
+      })
+      .catch((error)=>{
+        setErrorMessage(error.message);
       });
     };
 

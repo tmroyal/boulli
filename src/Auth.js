@@ -27,7 +27,6 @@ export function SignUpForm(props){
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then(function(result){
             result.user.sendEmailVerification();
-
             navigate("/mycards");
         })
         .catch(function(error) {
