@@ -4,15 +4,15 @@
           ".read": "query.orderByChild == 'public' && query.equalTo == true",
           "$cardset_id": {
                 ".read": "data.child('public').val() == true || auth.uid == data.child('owner').val()",
-                ".write": "auth.uid == data.child('owner').val()",
-                ".validate": "newData.hasChildren(['owner', 'public', 'title', 'description', 'cards'])",
+                ".write": "(auth != null && !data.exists()) || (data.exists() && auth.uid == data.child('owner').val())",
+                ".validate": "newData.hasChildren(['owner', 'public', 'title', 'description'])",
                 "owner": {
                     ".validate": "newData.isString()"
                 },
                 "title": {
                     ".validate": "newData.isString() && newData.val().length <= 32"
                 },
-                "descritpion": {
+                "description": {
                     ".validate": "newData.isString() && newData.val().length <= 128"
                 },
                 "public": {

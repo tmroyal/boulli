@@ -4,7 +4,7 @@ import { NavButton, StateButton } from './Buttons'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { InputComponent, FormError } from './FormControls';
-import { Link } from '@reach/router'
+import { Link, navigate } from "@reach/router"
 
 class CardsetViewNav extends React.Component {
 
@@ -45,7 +45,19 @@ function CardsetEditForm(props){
     const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
-      // props.mode String(create|update)
+
+      const newRecord = {
+        public: data.public,
+        owner: props.user.uid,
+        title: data.title,
+        description: data.description, 
+        cards: {}
+      };
+
+      firebase.database().ref('cardsets').push(newRecord)
+      .then((ref)=>{
+        navigate('/cardset/'+ref.key);
+      });
     };
 
     const functionNameCap = props.func.charAt(0).toUpperCase() + props.func.slice(1);
@@ -82,7 +94,7 @@ export class CardsetEdit extends React.Component {
   render (){
     let component;
     if (this.props.user){
-      component = <CardsetEditForm func={ this.props.func }/>;
+      component = <CardsetEditForm user={this.props.user} func={ this.props.func }/>;
     } else {
       component = <p><Link to="/signin">Sign in</Link> to create new cards</p>;
     }
