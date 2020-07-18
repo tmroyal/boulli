@@ -18,7 +18,7 @@ export function Logout(){
     );
 }
 
-export function SignUpForm(){
+export function SignUpForm(props){
     const { register, handleSubmit, watch, errors } = useForm();
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -70,6 +70,12 @@ export function SignUpForm(){
         }
     };
 
+    useEffect(()=>{
+      if (props.user){
+        navigate('/mycards');
+      }
+    });
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Sign up to create and save cards</h3>
@@ -105,7 +111,7 @@ export function SignUpForm(){
     );
 }
 
-export function SignInForm(){ 
+export function SignInForm(props){ 
     const { register, handleSubmit, watch, errors } = useForm();
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -117,6 +123,12 @@ export function SignInForm(){
             setErrorMessage(error.message);
         });
     };
+
+    useEffect(()=>{
+      if (props.user){
+        navigate('/mycards');
+      }
+    });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -69,7 +69,6 @@ export class CardsetListView extends React.Component {
         if (this.dbRef){ this.dbRef.off('value'); }
     }
 
-    // next, onClick below will call the parent, and the parent will change the component to card
    
     render(){
         const keys = this.state.cardsets ? Object.keys(this.state.cardsets) : [];
@@ -80,7 +79,7 @@ export class CardsetListView extends React.Component {
                         cardset={this.state.cardsets[cardset]} />;
         });
         if (elementList.length == 0){
-            elementList = "Loading";
+            elementList = "No cards to show yet.";
         }
 
         return (

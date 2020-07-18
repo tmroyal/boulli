@@ -38,8 +38,8 @@ import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetListView type="user" user={this.state.user} path="/mycards" />
                     <CardsetListView type="all" path="/" />
-                    <SignUpForm path="/signup" />
-                    <SignInForm path="/signin" />
+                    <SignUpForm user={this.state.user} path="/signup" />
+                    <SignInForm user={this.state.user} path="/signin" />
                     <Logout path="/logout" />
                     <EmailFunctions path="/auth_function/action" />
                     <AccountSettings path="/account" />
