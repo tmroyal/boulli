@@ -132,6 +132,12 @@ form input {
     width: 100%;
 }
 
+form input[type="checkbox"]{
+  width: auto;
+  vertical-align: middle;
+  height: 30px;
+}
+
 form div.errorMessage {
     height: 2em;
     font-size: 80%;

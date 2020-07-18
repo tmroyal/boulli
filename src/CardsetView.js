@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { CardEditorViewer } from './CardView'
 import { NavButton, StateButton } from './Buttons' 
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
+import { InputComponent, FormError } from './FormControls';
+import { Link } from '@reach/router'
 
 class CardsetViewNav extends React.Component {
 
@@ -28,6 +32,62 @@ class CardsetViewNav extends React.Component {
             </nav>
         );
     }
+}
+
+function CardsetEditForm(props){ 
+    const defaultValues = {
+      public: true
+    };
+
+    const { register, handleSubmit, watch, errors } = useForm({
+      defaultValues: defaultValues
+    });
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const onSubmit = (data) => {
+      // props.mode String(create|update)
+    };
+
+    const functionNameCap = props.func.charAt(0).toUpperCase() + props.func.slice(1);
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <h3>{ functionNameCap } Card Deck</h3>
+            <FormError errorMessage={ errorMessage } />
+            <InputComponent
+                name="title"
+                label="Cardset Title"
+                registration={ register({ required: "Please provide a title"}) }
+                errors={errors}
+            />
+            <InputComponent
+                name="description"
+                label="Description"
+                registration={ register({ required: "Please provide a brief description"}) }
+                errors={errors}
+            />
+            <div>
+              <label htmlFor="public">Public:</label>
+              <input type="checkbox" name="public" ref={register} />
+            </div>
+            <input type="submit" id="signupButton" value={ functionNameCap + " Deck" } />
+        </form>
+        // todo: delete button below form
+    );
+}
+
+
+export class CardsetEdit extends React.Component {
+  
+  render (){
+    let component;
+    if (this.props.user){
+      component = <CardsetEditForm func={ this.props.func }/>;
+    } else {
+      component = <p><Link to="/signin">Sign in</Link> to create new cards</p>;
+    }
+    return component;
+  }
 }
 
 export class CardsetView extends React.Component {
@@ -75,7 +135,6 @@ export class CardsetView extends React.Component {
         });
     }
 
-    // TODO: when card while editing changed, trigger this method first
     saveCards(){
         let query = this.getQuery()+'/cards';
         firebase.database().ref(query).set(this.state.cards).then(function(error){
@@ -109,7 +168,7 @@ export class CardsetView extends React.Component {
             front: "$$=$$",
             back: "$$=$$"
         }
-        // TODO: UI to handle latency
+
         firebase.database().ref(this.getQuery()+'/cards').push(newCard)
         .then((cardRecord)=>{
             let ind = this.state.keys.indexOf(cardRecord.key);
