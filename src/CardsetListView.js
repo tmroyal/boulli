@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from "@reach/router"
+import { navigate, Link } from "@reach/router"
+import { StateButton } from './Buttons' 
 
 
 class CardsetListItem extends React.Component {
@@ -12,15 +13,32 @@ class CardsetListItem extends React.Component {
         }
     }
 
+    editCardset(e){
+      navigate("/editcardset/"+this.props.id);
+    }
+
+    deleteCardset(e){
+    }
+
     render (){
         return (
             <>
-                <Link className="routerLink" to={"/cardset/" + this.props.id }>
                 <div className="raised cardsetSelector">
-                    <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
-                    <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
-                </div>
+                  <Link className="routerLink" to={"/cardset/" + this.props.id }>
+                      <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
+                      <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
                 </Link>
+                  <StateButton 
+                      className="cardsetListButton"
+                      onClick={this.deleteCardset.bind(this)}
+                      imgsrc="/img/trash.svg"
+                      text="" />
+                  <StateButton 
+                      className="cardsetListButton"
+                      onClick={this.editCardset.bind(this)}
+                      imgsrc="/img/edit.svg"
+                      text="" />
+              </div>
             </>
         );
     }

@@ -34,33 +34,66 @@ class CardsetViewNav extends React.Component {
     }
 }
 
+
 function CardsetEditForm(props){ 
     const defaultValues = {
       public: true
     };
 
-    const { register, handleSubmit, watch, errors } = useForm({
+    const { register, handleSubmit, setValue, watch, errors } = useForm({
       defaultValues: defaultValues
     });
+
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onSubmit = (data) => {
-      // TODO: implement edit flow
+    // populate form if in edit mode
+    useEffect(()=>{
+      if (props.func == "edit" && props.user && props.cardsetId){
+        firebase.database().ref('/cardsets/'+props.cardsetId).once('value')
+        .then(function(snapshot){
+          console.log(snapshot);
+          setValue("title", snapshot.val().title);
+          setValue("description", snapshot.val().description);
+          setValue("public", snapshot.val().public);
+        });
+      } else {
+        console.log("not loaded");
+      }
+    });
 
-      const newRecord = {
-        public: data.public,
-        owner: props.user.uid,
-        title: data.title,
-        description: data.description, 
-      };
-
-      firebase.database().ref('cardsets').push(newRecord)
+    const submitNew = (record) =>{
+      firebase.database().ref('cardsets').push(record)
       .then((ref)=>{
         navigate('/cardset/'+ref.key);
       })
       .catch((error)=>{
         setErrorMessage(error.message);
       });
+    };
+
+    const submitEdit = (record) =>{
+      firebase.database().ref('cardsets/'+props.cardsetId).set(record)
+      .then(()=>{
+        navigate('/cardset/'+props.cardsetId);
+      })
+      .catch((error)=>{
+        setErrorMessage(error.message);
+      });
+    };
+
+    const onSubmit = (data) => {
+      const record = {
+        public: data.public,
+        owner: props.user.uid,
+        title: data.title,
+        description: data.description, 
+      };
+
+      if (props.func == "edit"){
+        submitEdit(record);
+      } else {
+        submitNew(record);
+      }
     };
 
     const functionNameCap = props.func.charAt(0).toUpperCase() + props.func.slice(1);
@@ -97,9 +130,12 @@ export class CardsetEdit extends React.Component {
   render (){
     let component;
     if (this.props.user){
-      component = <CardsetEditForm user={this.props.user} func={ this.props.func }/>;
+      component = <CardsetEditForm 
+                      cardsetId={this.props.cardsetId} 
+                      user={this.props.user} 
+                      func={ this.props.func }/>;
     } else {
-      component = <p><Link to="/signin">Sign in</Link> to create new cards</p>;
+      component = <p><Link to="/signin">Sign in</Link> to edit and create cards</p>;
     }
     return component;
   }

@@ -199,7 +199,7 @@ a.navLink:hover, a.navLink:focus {
     background-color: #106a73;
 }
 
-nav button {
+nav button, .cardsetListButton {
     font-family: 'Montserrat', sans-serif;
     font-size: 80%;
     font-weight: 200;
@@ -214,10 +214,15 @@ nav button {
     padding: 1em 0;
 }
 
+.cardsetListButton {
+  float: right;
+  width: 10%;
+}
+
 .cardsetSelector {
     background-color: #fafafc;
     margin: 20px 0;
-    padding: 10px 8px;
+    padding: 20px 8px;
 }
 
 .cardsetSelector:hover {
