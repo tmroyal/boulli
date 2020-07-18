@@ -25,8 +25,8 @@ export function SignUpForm(){
 
     const onSubmit = (data) => {
         firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-        .then(function(user){
-            user.sendEmailVerification();
+        .then(function(result){
+            result.user.sendEmailVerification();
 
             navigate("/mycards");
         })
@@ -143,14 +143,24 @@ export function SignInForm(){
 
 
 
-function ChangeEmailForm(params){
+function ChangeEmailForm(props){
+    const { register, handleSubmit, watch, errors } = useForm();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
-        firebase.auth().currentUser.updateEmail(data.email)
+        const credential = firebase.auth.EmailAuthProvider.credential(
+          firebase.auth().currentUser.email,
+          data.password 
+        );
+
+        firebase.auth().currentUser.reauthenticateWithCredential(credential)
+        .then(()=>{
+          return firebase.auth().currentUser.updateEmail(data.email);
+        })
         .then(function(user){
-            navigate("/mycards");
+          navigate('/mycards');
         }).catch(function(error) {
-            setErrorMessage(error.message);
+          setErrorMessage(error.message);
         });
     };
 
@@ -170,10 +180,17 @@ function ChangeEmailForm(params){
     };
 
     return (
-      <form>
-        <h3>Change Email Address</h3>
-        <p>Current Address { props.currentAddress }</p>
+      <form onSubmit={ handleSubmit(onSubmit) }>
+        <h4>Change Email Address</h4>
+        <p>Current address:<br/>{ props.currentAddress }</p> 
         <FormError errorMessage={ errorMessage } />
+        <InputComponent
+            name="password"
+            label="Password"
+            registration={ register({ required: "Please provide your password"}) }
+            errors={errors}
+            isPassword="true"
+        />
         <InputComponent 
             name="email" 
             label="Enter New Email Address" 
@@ -186,15 +203,23 @@ function ChangeEmailForm(params){
             registration={register(emailConfirmValidation)} 
             errors={ errors }
         />
-        <input type="submit" id="signupButton" value="Change Email Address" />
+        <input type="submit" id="signupButton" value="Change Email" />
       </form>
     );
 }
 
-function ChangePasswordForm(){
+function ChangePasswordForm(props){
+    const { register, handleSubmit, watch, errors } = useForm();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
-        firebase.auth().currentUser.reauthenticateWithCredential(data.oldPassword)
+
+        const credential = firebase.auth.EmailAuthProvider.credential(
+          firebase.auth().currentUser.email,
+          data.oldPassword 
+        );
+
+        firebase.auth().currentUser.reauthenticateWithCredential(credential)
         .then(()=>{
           return firebase.auth().currentUser.updatePassword(data.newPassword);
         })
@@ -225,13 +250,12 @@ function ChangePasswordForm(){
     };
 
     return (
-      <form>
-        <h3>Change Email Address</h3>
-        <p>Current Address { props.currentAddress }</p>
+      <form onSubmit={ handleSubmit(onSubmit) }>
+        <h4>Change Password</h4>
         <FormError errorMessage={ errorMessage } />
           <InputComponent
               name="oldPassword"
-              label="Old Password"
+              label="Verify old Password"
               registration={ register({ required: "Please provide your old password"}) }
               errors={errors}
               isPassword="true"
@@ -260,12 +284,10 @@ export function AccountSettings(){
   const [emailAddress, setEmailAddress] = useState('');
   
   useEffect(()=>{
-    if (!firebase.auth().currentUser){
-      navigate('/signin');
-    } else {
+    if (firebase.auth().currentUser){
       setEmailAddress(firebase.auth().currentUser.email);
     }
-  },[]);
+  });
 
   return (
     <>

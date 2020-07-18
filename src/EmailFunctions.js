@@ -142,7 +142,7 @@ function ResetPasswordEmailForm(props){
   return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Enter and verify your new password.</h3>
-        <h4>{ props.email }</h4>
+        <h4>Your email: { props.email }</h4>
         <FormError errorMessage={ errorMessage } />
 
         <InputComponent 
@@ -191,7 +191,7 @@ function ResetPasswordEmailView(props){
   };
 
   useEffect(()=>{
-    auth.verifyPasswordResetCode(props.query.oobCode).then(function(email){
+    firebase.auth().verifyPasswordResetCode(props.query.oobCode).then(function(email){
       setEmail(email);
       setResetPasswordState('form');    
     }).catch(function(error){
@@ -238,19 +238,19 @@ function RecoverEmail(props){
   var restoredEmail = null;
 
   useEffect(()=>{
-    auth.checkActionCode(props.query.oobCode)
+    firebase.auth().checkActionCode(props.query.oobCode)
     .then(function(info){
-      restoreEmail = info.data.email;
+      restoredEmail = info.data.email;
       setRecoveryState('Setting email to '+restoredEmail);
-      return auth.applyActionCode(props.query.oobCode);
+      return firebase.auth().applyActionCode(props.query.oobCode);
     })
     .then(function(){
       setRecoveryState('Email set to'+restoredEmail);
+      navigate('/logout');
     })
     .catch(function(error){
       setRecoveryState(error.message);
     });
-    
   },[]);
 
   return (
@@ -267,7 +267,7 @@ function VerifyEmail(props){
   const [verifyState, setVerifyState] = useState('Verifying Email');
 
   useEffect(()=>{
-    auth.applyActionCode(actionCode).then(function(resp) {
+    firebase.auth().applyActionCode(props.query.oobCode).then(function(resp) {
       navigate('/mycards');
     })
     .catch(function(error){
