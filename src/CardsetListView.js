@@ -15,7 +15,7 @@ export class DeleteCardsetConfirmation extends React.Component {
     firebase.database().ref('/cardsets/'+this.props.cardsetId)
     .remove()
     .then(()=>{
-      navigate('/mycards');
+      navigate(-1);
     })
     .catch((error)=>{
       this.setState({ error: error.message }); 

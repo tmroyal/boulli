@@ -149,7 +149,7 @@ form div.errorMessage {
     font-size: 80%;
 }
 
-form #signupButton {
+form .submitButton {
     background-color: #093d42;
     width: 50%;
     margin: 0 auto;
@@ -159,7 +159,7 @@ form #signupButton {
     border: none;
 }
 
-form #signupButton:hover, form #signupButton:focus {
+form .submitButton:hover, form .submitButton:focus {
     background-color: #106a73;
 }
 

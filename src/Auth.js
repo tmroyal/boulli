@@ -105,7 +105,7 @@ export function SignUpForm(props){
                 errors={ errors }
                 isPassword="true"
             />
-            <input type="submit" id="signupButton" value="Sign Up" />
+            <input type="submit" className="submitButton" value="Sign Up" />
         </form>
     );
 }
@@ -146,7 +146,7 @@ export function SignInForm(props){
                 errors={errors}
                 isPassword="true"
             />
-            <input type="submit" id="signupButton" value="Sign In" />
+            <input type="submit" className="submitButton" value="Sign In" />
             <div id="pwreset"><a href="/password_reset">Forgot password?</a></div>
         </form>
     );
@@ -214,7 +214,7 @@ function ChangeEmailForm(props){
             registration={register(emailConfirmValidation)} 
             errors={ errors }
         />
-        <input type="submit" id="signupButton" value="Change Email" />
+        <input type="submit" className="submitButton" value="Change Email" />
       </form>
     );
 }
@@ -234,9 +234,9 @@ function ChangePasswordForm(props){
           return firebase.auth().currentUser.updatePassword(data.newPassword);
         })
         .then(function(user){
-            navigate("/mycards");
+          navigate("/mycards");
         }).catch(function(error) {
-            setErrorMessage(error.message);
+          setErrorMessage(error.message);
         });
     };
 
@@ -284,7 +284,7 @@ function ChangePasswordForm(props){
               errors={ errors }
               isPassword="true"
           />
-        <input type="submit" id="signupButton" value="Change Password" />
+        <input type="submit" className="submitButton" value="Change Password" />
       </form>
     );
 
@@ -332,7 +332,7 @@ export function DeleteAccountForm(props){
           errors={errors}
           isPassword="true"
       />
-      <input type="submit" id="signupButton" value="Confirm Account Delete" />
+      <input type="submit" className="submitButton" value="Confirm Account Delete" />
     </form>
   );
 }

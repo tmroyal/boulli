@@ -124,7 +124,7 @@ function CardsetEditForm(props){
               <label htmlFor="public">Public:</label>
               <input type="checkbox" name="public" ref={register} />
             </div>
-            <input type="submit" id="signupButton" value={ functionNameCap + " Deck" } />
+            <input type="submit" className="submitButton" value={ functionNameCap + " Deck" } />
         </form>
     );
 }

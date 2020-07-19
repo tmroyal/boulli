@@ -49,7 +49,7 @@ function ResetPasswordForm(props){
             registration={register(emailValidation)}
             errors={errors}
         />
-        <input type="submit" id="signupButton" value="Reset Password" />
+        <input type="submit" className="submitButton" value="Reset Password" />
 
       </form> 
   );
@@ -160,7 +160,7 @@ function ResetPasswordEmailForm(props){
             isPassword="true"
         />
 
-        <input type="submit" id="signupButton" value="Reset Password" />
+        <input type="submit" className="submitButton" value="Reset Password" />
 
       </form> 
   );
