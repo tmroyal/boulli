@@ -3,6 +3,36 @@ import { navigate, Link } from "@reach/router"
 import { StateButton } from './Buttons' 
 
 
+export class DeleteCardsetConfirmation extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      error: ""
+    }
+  }
+
+  handleClick(){
+    firebase.database().ref('/cardsets/'+this.props.cardsetId)
+    .remove()
+    .then(()=>{
+      navigate('/mycards');
+    })
+    .catch((error)=>{
+      this.setState({ error: error.message }); 
+    });
+  }
+
+  render (){
+    return (
+      <>
+        <h3>Delete Cardset?</h3>
+        <p>Are you sure you want to delete this cardset?</p>
+        <button className="confirmationButton" onClick={this.handleClick.bind(this) }><p>Delete</p></button>
+      </>
+    );
+  }
+}
+
 class CardsetListItem extends React.Component {
     descriptionString(){
         const description = this.props.cardset.description;
@@ -18,6 +48,10 @@ class CardsetListItem extends React.Component {
     }
 
     deleteCardset(e){
+      // TODO: pick an edit page url
+      // add this to app.js
+      // and create a deletion confirmation page
+      navigate("/deletecardset/"+this.props.id);
     }
 
     render (){

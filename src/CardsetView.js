@@ -56,9 +56,7 @@ function CardsetEditForm(props){
           setValue("description", snapshot.val().description);
           setValue("public", snapshot.val().public);
         });
-      } else {
-        console.log("not loaded");
-      }
+      } 
     });
 
     const submitNew = (record) =>{
@@ -120,7 +118,6 @@ function CardsetEditForm(props){
             </div>
             <input type="submit" id="signupButton" value={ functionNameCap + " Deck" } />
         </form>
-        // todo: delete button below form
     );
 }
 

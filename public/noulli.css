@@ -192,22 +192,29 @@ a.navLink {
     padding: 0.3em 1em;
     background-color: #093d42;
     box-shadow: 2px 2px 2px lightgrey;
-    margin: 0 0.5em 0 0;
+    margin: 0.3em 0.5em 0.3em 0;
 }
 
 a.navLink:hover, a.navLink:focus {
     background-color: #106a73;
 }
 
-nav button, .cardsetListButton {
+nav button, .cardsetListButton, .confirmationButton {
     font-family: 'Montserrat', sans-serif;
     font-size: 80%;
     font-weight: 200;
-    margin-top: 0.4em 0.4em 0.4em 0em;
+    margin: 0.4em 0.4em 0.4em 0em;
     padding: 0.5em;
     background: inherit;
     border: none;
     width: 25%;
+}
+
+button.confirmationButton {
+  background-color: #bb5151;
+  color: white;
+  font-size: 100%;
+  margin-top: 1.2em;
 }
 
 .formError {

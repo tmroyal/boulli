@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { CardsetView, CardsetEdit } from './CardsetView' 
-import { CardsetListView } from './CardsetListView'
+import { DeleteCardsetConfirmation, CardsetListView } from './CardsetListView'
 import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
 import { Logout, SignUpForm, SignInForm, AccountSettings } from './Auth'
@@ -36,6 +36,7 @@ import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
                     <CardsetView path="/cardset/:cardsetId" />
                     <CardsetEdit user={this.state.user} func="new" path="/newcardset" />
                     <CardsetEdit user={this.state.user} func="edit" path="/editcardset/:cardsetId" />
+                    <DeleteCardsetConfirmation path="/deletecardset/:cardsetId" />
 
                     <CardsetListView type="user" user={this.state.user} path="/mycards" />
                     <CardsetListView type="all" path="/" />
