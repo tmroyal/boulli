@@ -48,30 +48,41 @@ class CardsetListItem extends React.Component {
     }
 
     deleteCardset(e){
-      // TODO: pick an edit page url
-      // add this to app.js
-      // and create a deletion confirmation page
       navigate("/deletecardset/"+this.props.id);
     }
 
     render (){
+        let editbuttons;
+        if (firebase.auth().currentUser && this.props.cardset.owner == firebase.auth().currentUser.uid){
+          editbuttons = (
+            <>
+              <StateButton 
+                  className="cardsetListButton"
+                  onClick={this.deleteCardset.bind(this)}
+                  imgsrc="/img/trash.svg"
+                  text="" />
+              <StateButton 
+                  className="cardsetListButton"
+                  onClick={this.editCardset.bind(this)}
+                  imgsrc="/img/edit.svg"
+                  text="" />
+            </>
+          );
+
+
+        } else {
+          editbuttons = '';
+        }
+            
+
         return (
             <>
-                <div className="raised cardsetSelector">
-                  <Link className="routerLink" to={"/cardset/" + this.props.id }>
-                      <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
-                      <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
-                </Link>
-                  <StateButton 
-                      className="cardsetListButton"
-                      onClick={this.deleteCardset.bind(this)}
-                      imgsrc="/img/trash.svg"
-                      text="" />
-                  <StateButton 
-                      className="cardsetListButton"
-                      onClick={this.editCardset.bind(this)}
-                      imgsrc="/img/edit.svg"
-                      text="" />
+              <div className="raised cardsetSelector">
+                <Link className="routerLink" to={"/cardset/" + this.props.id }>
+                    <span className="cardsetSelectorTitle">{ this.props.cardset.title }</span>  
+                    <span className="cardsetSelectorDescription">{ this.descriptionString() }</span>
+              </Link>
+              { editbuttons }
               </div>
             </>
         );

@@ -63,16 +63,23 @@ class CardEditor extends React.Component {
 
 class CardViewStateButtons extends React.Component {
         render(){
+            let editbutton;
+            if (this.props.editable){
+              editbutton = <StateButton
+                  onClick={this.props.toggleEditing}
+                  imgsrc={"/img/" + (this.props.editing ? "check-square.svg" : "edit.svg")}
+                  text={this.props.editing ? "Done" : "Edit"} />
+            } else {
+              editbutton = ''
+            }
+
             return (
                 <nav>
                     <StateButton
                         onClick={this.props.toggleVisibleSide}
                         imgsrc={"/img/rotate-" + (this.props.showingFront ? "ccw" : "cw") + ".svg"}
                         text={this.props.showingFront ? "Front" : "Back"} />
-                    <StateButton
-                        onClick={this.props.toggleEditing}
-                        imgsrc={"/img/" + (this.props.editing ? "check-square.svg" : "edit.svg")}
-                        text={this.props.editing ? "Done" : "Edit"} />
+                    {editbutton}
                 </nav>
             );
         }
@@ -133,6 +140,7 @@ export class CardEditorViewer extends React.Component {
         return (
             <>
                 <CardViewStateButtons 
+                    editable={this.props.editable}
                     editing={this.state.editing}
                     showingFront={this.props.showingFront}
                     toggleEditing={this.toggleEditing.bind(this)}

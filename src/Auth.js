@@ -224,7 +224,6 @@ function ChangePasswordForm(props){
     const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = (data) => {
-
         const credential = firebase.auth.EmailAuthProvider.credential(
           firebase.auth().currentUser.email,
           data.oldPassword 

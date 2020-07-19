@@ -9,6 +9,22 @@ import { Link, navigate } from "@reach/router"
 class CardsetViewNav extends React.Component {
 
     render (){
+        let editbuttons;
+        if (this.props.editable){
+          editbuttons = (<>
+                <StateButton 
+                    onClick={this.props.onAddCard}
+                    imgsrc="/img/plus-square.svg"
+                    text="Add" />
+                <StateButton
+                    onClick={this.props.onRemoveCard}
+                    imgsrc="/img/trash.svg"
+                    text="Delete" />
+            </>);
+        } else {
+          editbuttons = '';
+        }
+
         return (
             <nav>
                 <NavButton 
@@ -21,14 +37,7 @@ class CardsetViewNav extends React.Component {
                     onClick={this.props.onNavigate.bind(this,1)}
                     imgsrc="/img/arrow-right.svg"
                     text="Next" />
-                <StateButton 
-                    onClick={this.props.onAddCard}
-                    imgsrc="/img/plus-square.svg"
-                    text="Add" />
-                <StateButton
-                    onClick={this.props.onRemoveCard}
-                    imgsrc="/img/trash.svg"
-                    text="Delete" />
+                { editbuttons }
             </nav>
         );
     }
@@ -51,7 +60,6 @@ function CardsetEditForm(props){
       if (props.func == "edit" && props.user && props.cardsetId){
         firebase.database().ref('/cardsets/'+props.cardsetId).once('value')
         .then(function(snapshot){
-          console.log(snapshot);
           setValue("title", snapshot.val().title);
           setValue("description", snapshot.val().description);
           setValue("public", snapshot.val().public);
@@ -123,7 +131,6 @@ function CardsetEditForm(props){
 
 
 export class CardsetEdit extends React.Component {
-  
   render (){
     let component;
     if (this.props.user){
@@ -145,6 +152,7 @@ export class CardsetView extends React.Component {
             cards: [],
             keys: [],
             index: 0,
+            editable: false,
             showingFront: true
         }
         this.dbRef = null;
@@ -158,10 +166,13 @@ export class CardsetView extends React.Component {
         this.dbRef.on('value', (snapshot)=>{
             let cards = snapshot.val().cards || {};
             let keys = Object.keys(cards) || [];
+            let editable = firebase.auth().currentUser 
+                      && (snapshot.val().owner == firebase.auth().currentUser.uid);
 
             this.setState({
                 cards: cards,
                 keys: keys, 
+                editable: editable
             });
         });
     }
@@ -185,9 +196,7 @@ export class CardsetView extends React.Component {
 
     saveCards(){
         let query = this.getQuery()+'/cards';
-        firebase.database().ref(query).set(this.state.cards).then(function(error){
-            if (error){ console.error(error); }
-        });
+        firebase.database().ref(query).set(this.state.cards);
     }
 
     navigateCards(direction){
@@ -253,6 +262,7 @@ export class CardsetView extends React.Component {
                 saveCard={ this.saveCards.bind(this) }
                 showingFront= {this.state.showingFront} 
                 toggleSide={ this.toggleVisibleSide.bind(this) }
+                editable={ this.state.editable }
             /> : 
             <></>;
         return (
@@ -263,6 +273,7 @@ export class CardsetView extends React.Component {
                     onNavigate={ this.navigateCards.bind(this) }
                     onAddCard={ this.addCard.bind(this) }
                     onRemoveCard={ this.removeCard.bind(this) }
+                    editable ={ this.state.editable }
                 />
             </section>
         );

@@ -33,7 +33,7 @@ import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
                 <Header/>
                 <NavBar user={this.state.user} />
                 <Router>
-                    <CardsetView path="/cardset/:cardsetId" />
+                    <CardsetView user={this.state.user} path="/cardset/:cardsetId" />
                     <CardsetEdit user={this.state.user} func="new" path="/newcardset" />
                     <CardsetEdit user={this.state.user} func="edit" path="/editcardset/:cardsetId" />
                     <DeleteCardsetConfirmation path="/deletecardset/:cardsetId" />
