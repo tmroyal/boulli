@@ -4,7 +4,7 @@ import { CardsetView, CardsetEdit } from './CardsetView'
 import { DeleteCardsetConfirmation, CardsetListView } from './CardsetListView'
 import { Router, Link } from '@reach/router'
 import { Header, NavBar } from './NavBars'
-import { Logout, SignUpForm, SignInForm, AccountSettings } from './Auth'
+import { Logout, SignUpForm, SignInForm, DeleteAccountForm, AccountSettings } from './Auth'
 import { ErrorPath } from './ErrorPaths'
 import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
 
@@ -48,6 +48,7 @@ import { EmailFunctions, ResetPasswordView } from './EmailFunctions'
                     <EmailFunctions path="/auth_function/action" />
                     <AccountSettings path="/account" />
                     <ResetPasswordView path="/password_reset" />
+                    <DeleteAccountForm path="/deleteaccount" />
 
                     <ErrorPath path="/error/:error" />
                     <ErrorPath error="notfound" default />

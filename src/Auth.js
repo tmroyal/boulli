@@ -193,7 +193,7 @@ function ChangeEmailForm(props){
     return (
       <form onSubmit={ handleSubmit(onSubmit) }>
         <h4>Change Email Address</h4>
-        <p>Current address:<br/>{ props.currentAddress }</p> 
+        <p>Current address: { props.currentAddress }</p> 
         <FormError errorMessage={ errorMessage } />
         <InputComponent
             name="password"
@@ -291,6 +291,55 @@ function ChangePasswordForm(props){
 
 }
 
+export function DeleteAccountForm(props){
+  const [error, setError] = useState('');
+  const { register, handleSubmit, watch, errors } = useForm();
+
+  const onSubmit = (data)=>{
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      firebase.auth().currentUser.email,
+      data.password 
+    );
+
+    firebase.auth().currentUser.reauthenticateWithCredential(credential)
+    .then(function(){
+      return firebase.database().ref('/cardsets/')
+        .orderByChild('owner').equalTo(firebase.auth().currentUser.uid)
+        .once("value", (snapshot)=>{
+          snapshot.forEach((cs)=>{
+            cs.ref.remove();
+          });
+        })
+    })
+    .then(function(){
+      return firebase.auth().currentUser.delete();
+    })
+    .then(()=>{
+      navigate('/'); 
+    })
+    .catch((error)=>{
+      setError(error.message); 
+    });
+  }
+
+  return (
+    <form onSubmit={ handleSubmit(onSubmit) }>
+      <h3>Delete Account?</h3>
+      <p>Are you sure you want to delete your account? This will permanently delete your account and all associated card sets.</p>
+      <InputComponent
+          name="password"
+          label="Enter Password to Confirm"
+          registration={ register({ required: "You must supply password to delete your account."}) }
+          errors={errors}
+          isPassword="true"
+      />
+      <input type="submit" id="signupButton" value="Confirm Account Delete" />
+    </form>
+  );
+}
+
+
+
 export function AccountSettings(){
   const [emailAddress, setEmailAddress] = useState('');
   
@@ -304,6 +353,9 @@ export function AccountSettings(){
     <>
       <ChangeEmailForm currentAddress={ emailAddress } />
       <ChangePasswordForm />
+      <div id="deleteAccountBox">
+        <p>Click here to <Link to="/deleteaccount">Delete Your Account</Link></p>
+      </div>
     </>
   );
 }

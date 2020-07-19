@@ -58,6 +58,12 @@ h4 {
     display: inline-block;
 }
 
+#deleteAccountBox {
+  border-top: 1px solid lightgrey;
+  margin-top: 2em;
+  padding-top: 1em;
+}
+
 .raised {
     box-shadow: 1px 1px 2px lightgrey;
 }
