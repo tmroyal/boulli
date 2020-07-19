@@ -1,6 +1,7 @@
 {
   "rules": {
       "cardsets": {
+          ".indexOn": ["public", "owner"],
           ".read": "(query.orderByChild == 'owner' && query.equalTo == auth.uid) || (query.orderByChild == 'public' && query.equalTo == true)",
           "$cardset_id": {
                 ".read": "data.child('public').val() == true || auth.uid == data.child('owner').val()",
