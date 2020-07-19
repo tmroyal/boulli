@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { InputComponent, FormError } from './FormControls';
 
+
 export function Logout(){
     useEffect(()=>{
         firebase.auth().signOut().then(function(){
@@ -17,6 +18,7 @@ export function Logout(){
         <h1>Logging out</h1>
     );
 }
+
 
 export function SignUpForm(props){
     const { register, handleSubmit, watch, errors } = useForm();
