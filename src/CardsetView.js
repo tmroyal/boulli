@@ -78,7 +78,8 @@ function CardsetEditForm(props){
     };
 
     const submitEdit = (record) =>{
-      firebase.database().ref('cardsets/'+props.cardsetId).set(record)
+        
+      firebase.database().ref('cardsets/'+props.cardsetId).update(record)
       .then(()=>{
         navigate('/cardset/'+props.cardsetId);
       })
