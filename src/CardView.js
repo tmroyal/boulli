@@ -125,6 +125,12 @@ export class CardEditorViewer extends React.Component {
         MathJax.typeset();
     }
 
+    componentWillUnmount(){
+        if (this.state.editing){
+            this.props.saveCard();
+        }
+    }
+
     render (){
         var component = !this.state.editing ?
                            <CardView 
